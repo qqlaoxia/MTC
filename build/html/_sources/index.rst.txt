@@ -11,10 +11,9 @@ Welcome to MTC's documentation!
    :caption: Contents
    
    Gene/index
+   Readthedocs维护/index
 
-.. image:: logo.jpg
-   :align: center
-   :width: 200px
+
 
 Indices and tables
 ==================
@@ -22,3 +21,7 @@ Indices and tables
 * :ref:`genindex`
 * :ref:`modindex`
 * :ref:`search`
+
+.. image:: logo.jpg
+   :align: center
+   :width: 200px

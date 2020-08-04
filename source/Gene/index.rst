@@ -11,13 +11,4 @@ Document for Gene Manipulation
    :caption: Contents
    
    Primer_blast
-
-
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
+   16s_sequence_assembly.rst

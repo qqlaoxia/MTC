@@ -3,25 +3,13 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to MTC's documentation!
-===============================
+Technologies for the Readthedocs website maintenance!
+=============================================================
+
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents
    
-   Gene/index
-   Readthedocs维护/index
+   Readthedocs维护/FAQ.rst
 
-
-
-Indices and tables
-==================
-
-* :ref:`genindex`
-* :ref:`modindex`
-* :ref:`search`
-
-.. image:: logo.jpg
-   :align: center
-   :width: 200px

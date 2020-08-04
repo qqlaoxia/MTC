@@ -1,0 +1,338 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>16s核糖体序列拼接实验 &mdash; MTC 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Technologies for the Readthedocs website maintenance!" href="../Readthedocs维护/index.html" />
+    <link rel="prev" title="Primer_blast算法实现" href="Primer_blast.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> MTC
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Document for Gene Manipulation</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Primer_blast.html">Primer_blast算法实现</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">16s核糖体序列拼接实验</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1. 拼接思路</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.核心算法</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.具体实例</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id4">3.1 数据读取</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#swalign">3.2 进行swalign，确定最长的相同部分</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">3.3 进行序列拼接</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">4. 进行结果验证</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id7">4.1 直接与公司结果作比较</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#atcc-824">4.2 利用ATCC 824序列进行比对</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Readthedocs维护/index.html">Technologies for the Readthedocs website maintenance!</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MTC</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Document for Gene Manipulation</a> &raquo;</li>
+        
+      <li>16s核糖体序列拼接实验</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Gene/16s_sequence_assembly.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <blockquote>
+<div><p>背景说明：
+在正常的16s测序中，测序公司是将正相链和反向链同时测序，当两者出现相同序列后，则终止测序，将这两条链拼接，则为全链长度。</p>
+</div></blockquote>
+<div class="section" id="s">
+<h1>16s核糖体序列拼接实验<a class="headerlink" href="#s" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="id1">
+<h2>1. 拼接思路<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">graph</span> <span class="n">TD</span>
+    <span class="n">A</span><span class="p">[</span><span class="n">swalign</span><span class="p">]</span><span class="o">--&gt;</span><span class="n">B</span><span class="p">(</span><span class="n">匹配结果</span><span class="p">)</span>
+    <span class="n">B</span><span class="o">--&gt;</span><span class="n">C</span><span class="p">{</span><span class="n">寻找最长的相同片段</span><span class="p">}</span>
+    <span class="n">C</span><span class="o">--&gt;</span><span class="n">D</span><span class="p">[</span><span class="n">计算正反两条链在相同片段的各自部分</span><span class="p">]</span>
+    <span class="n">D</span><span class="o">--&gt;</span><span class="n">E</span><span class="p">[</span><span class="n">完成拼接</span><span class="p">]</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>2.核心算法<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<p>算法的核心是利用swalign寻找到最长的相同片段。为此，我们开发的了一个函数Same_length</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function [Res] = Same_length(seq)
+% 本函数用于计算长度最长的重复序列，seq为Alignment的第二行，即由&#39;|：-’组成的序列
+%   seq为序列，Res为包含最长连续片段的起点和终点组成的向量
+%   Copywrite by MTC, 2020.8.4, By Xia Menglei, Version 1.0
+
+Res=(seq~=&#39;|&#39;);
+po=find(Res==1);
+po1=diff(po);
+po2=find(po1==max(po1));
+Res=[po(po2)+1,po(po2+1)-1];
+end
+</pre></div>
+</div>
+<p>Res返回的是共同序列在正链上的起始位点和终止位点。正义链是自己定的，一般公司会给出两条链，如果定义a为正，则b为负，反之亦然。只要保证全程都以该链为正即可。</p>
+</div>
+<div class="section" id="id3">
+<h2>3.具体实例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<p>以我们课题组之前的一次实验为案例进行说明</p>
+<div class="section" id="id4">
+<h3>3.1 数据读取<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">zheng</span><span class="o">=</span><span class="s1">&#39;GCCATGCGGCGTGCTTACCATGCAGTCGAGCGGGGAACTTCGGTTCCCAGCGGCGGACGGGTGAGTAACACGTGGGTAACCTACCTCATAGTGGGGAATAGCCTTTCGAAAGGAAGATTAATACCGCATAATACTCGAGAATCGCATGATTCTTGAGCCAAAGGATTTATTCGCTATGAGATGGACCCGCGGCGCATTAGCTTGTTGGTGAGGTAACGGCTCACCAAGGCTTCGATGCGTAGCCGACCTGAGAGGGTGATCGGCCACATTGGAACTGAGACACGGTCCAGACTCCTACGGGAGGCAGCAGTGGGGAATATTGCACAATGGGGGAAACCCTGATGCAGCAACGCCGCGTGAGTGATGAAGGTCTTCGGATCGTAAAACTCTGTCTTATGGGACGATAATGACGGTACCATAGGAGGAAGCCACGGCTAACTACGTGCCAGCAGCCGCGGTAATACGTAGGTGGCAAGCGTTGTCCGGATTTACTGGGCGTAAAGGATGTGTAGGCGGATATTTAAGTGAGATGTGAAATCCCCGGGCTTAACTTGGGGGCTGCATTTCAAACTGGATGTCTGGAGTGCAGGAGAGGAAGGCAGAATTCCTAGTGTAGCGGTGAAATGCGTAGAGATTAGGAAGAATACCAGTGGCGAAGGCGGCCTTCTGGACTGTAACTGACGCTGAGGCATGAAAGCGTGGGGAGCAAACAGGATTAGATACCCTGGTAGTCCACGCCGTAAACGATGAATACTAGGTGTAGGAGGTATCGACTCCTTCTGTGCCGCAGTTAACACAATAAGTATTCCGCCTGGGAAGTACGGTCGCAAGATTAAAACTCAAAGGAATTGACGGGGACCCGCACAAGCAGCGGAGCATGTGGTTTAATTCGAAGCAACGCGAAGAACCTTACCTAGACTTGACATCTCCTGAATTAGTCCGTAATGGATGAAGTCCCTTTCGGGACAGGATGACAGGTGGTGCATGGTTGTCGTCAGCTCGTGTCGTGAGATGTTGGGTTAAGTCCCGCACGAGCGCACCCTATCATAGTGCTAACATTAGTGAGCACTCTAGTGAGACTGCCGGTACGGGAGAAGGTGGGATGACGTCCAATTCATTCATTGCCCCTTATGTTCTAG&#39;</span><span class="p">;</span>
+<span class="n">fan</span><span class="o">=</span><span class="s1">&#39;GCCCCCTCTTCGACCGCTGGTTCCAAAAGGTTACCTCACGGGCTTCGGGTGTTGCCGACTCTCATGGTGTGACGGGCGGTGTGTACAAGACCCGGGAACGTATTCACCGCGACATTCTGATTCGCGATTACTAGCAACTCCGGCTTCATGTAGGCGAGTTTCAGCCTACAATCCGAACTGGGATGGGGTTTTGAGTTTTGCTCCACCTTGCGGTATTGCATCTTTTTGTCCCCACCATTGTAGCACGTGTGTAGCCCTAGACATAAGGGGCATGATGATTTGACGTCATCCCCACCTTCCTCCCGGTTAACCCGGGCAGTCTCACTAGAGTGCTCAACTAAATGTTAGCAACTAATGATAAGGGTTGCGCTCGTTGCGGGACTTAACCCAACATCTCACGACACGAGCTGACGACAACCATGCACCACCTGTCATCCTGTCCCCGAAGGGACTTCATCCATTACGGACTAATTCAGGAGATGTCAAGTCTAGGTAAGGTTCTTCGCGTTGCTTCGAATTAAACCACATGCTCCGCTGCTTGTGCGGGTCCCCGTCAATTCCTTTGAGTTTTAATCTTGCGACCGTACTTCCCAGGCGGAATACTTATTGTGTTAACTGCGGCACAGAAGGAGTCGATACCTCCTACACCTAGTATTCATCGTTTACGGCGTGGACTACCAGGGTATCTAATCCTGTTTGCTCCCCACGCTTTCATGCCTCAGCGTCAGTTACAGTCCAGAAGGCCGCCTTCGCCACTGGTATTCTTCCTAATCTCTACGCATTTCACCGCTACACTAGGAATTCTGCCTTCCTCTCCTGCACTCCAGACATCCAGTTTGAAATGCAGCCCCCAAGTTAAGCCCGGGGATTTCACATCTCACTTAAATATCCGCCTACACATCCCTTTACGCCCAGTAAATCCGGACACGCTTGCCACCTACGTATTACCGCGGCTGCTGGCACGTAGTTAGCGTGCTTCCTCCTATGGTACCGTCATTATCGTCCATAAGACAGAGTTTACGATCCGAAGACCTTCATCACTCACGCGCGTGCTGCATCAGGCTTTCCCCAATGGTGCATATTCCCATGCTGCCTCCCGTAGGATCTGGAACGGGTCTCAGTTTCCAATGGGGGCGAATACCCCTCTCTCAGGGTCGGGCTTA&#39;</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="swalign">
+<h3>3.2 进行swalign，确定最长的相同部分<a class="headerlink" href="#swalign" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fan1</span><span class="o">=</span><span class="n">seqrcomplement</span><span class="p">(</span><span class="n">fan</span><span class="p">);</span>
+<span class="p">[</span><span class="n">Score</span><span class="p">,</span> <span class="n">Alignment</span><span class="p">]</span> <span class="o">=</span> <span class="n">swalign</span><span class="p">(</span><span class="n">zheng</span><span class="p">,</span> <span class="n">fan1</span><span class="p">);</span>
+ <span class="n">t</span><span class="o">=</span><span class="n">Alignment</span><span class="p">(</span><span class="mi">2</span><span class="p">,:);</span>
+<span class="n">Res</span> <span class="o">=</span> <span class="n">Same_length</span><span class="p">(</span><span class="n">t</span><span class="p">);</span>
+<span class="n">Alignment1</span><span class="o">=</span><span class="n">Alignment</span><span class="p">(</span><span class="mi">1</span><span class="p">,:);</span>
+<span class="n">same_seq</span><span class="o">=</span><span class="n">Alignment1</span><span class="p">(</span><span class="n">Res</span><span class="p">(</span><span class="mi">1</span><span class="p">):</span><span class="n">Res</span><span class="p">(</span><span class="mi">2</span><span class="p">));</span>
+</pre></div>
+</div>
+<p>需要说明的是： -
+Same_length为自己开发的函数，该函数可以判断出Alignment中最长的相同序列，并返回该序列在zheng序列的起始和终止位置(Res)；
+- same_seq为最长的相同序列（以zheng为模板）</p>
+</div>
+<div class="section" id="id5">
+<h3>3.3 进行序列拼接<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">po1</span><span class="o">=</span><span class="n">strfind</span><span class="p">(</span><span class="n">zheng</span><span class="p">,</span><span class="n">same_seq</span><span class="p">);</span>
+<span class="n">po2</span><span class="o">=</span><span class="n">strfind</span><span class="p">(</span><span class="n">fan</span><span class="p">,</span><span class="n">seqrcomplement</span><span class="p">(</span><span class="n">same_seq</span><span class="p">));</span>
+<span class="n">seq_total</span><span class="o">=</span><span class="p">[</span><span class="n">zheng</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">po1</span><span class="o">-</span><span class="mi">1</span><span class="p">),</span><span class="n">same_seq</span><span class="p">,</span><span class="n">seqrcomplement</span><span class="p">(</span><span class="n">fan</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">po2</span><span class="o">-</span><span class="mi">1</span><span class="p">))];</span>
+</pre></div>
+</div>
+<p><strong>seq_total即为拼接的结果</strong></p>
+<a class="reference internal image-reference" href="../_images/3.1.png"><img alt="Alignment Result" class="align-center" src="../_images/3.1.png" style="width: 800px;" /></a>
+</div>
+</div>
+<div class="section" id="id6">
+<h2>4. 进行结果验证<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id7">
+<h3>4.1 直接与公司结果作比较<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">a</span><span class="o">=</span><span class="s1">&#39;CTGGTTCCAAAGGTTACCTCACGGGCTTCGGGTGTTGCCGACTCTCATGGTGTGACGGGCGGTGTGTACAAGACCCGGGAACGTATTCACCGCGACATTCTGATTCGCGATTACTAGCAACTCCGGCTTCATGTAGGCGAGTTTCAGCCTACAATCCGAACTGGGATGGGGTTTTGAGTTTTGCTCCACCTTGCGGTATTGCATCTTTTTGTCCCCACCATTGTAGCACGTGTGTAGCCCTAGACATAAGGGGCATGATGATTTGACGTCATCCCCACCTTCCTCCCGGTTAACCCGGGCAGTCTCACTAGAGTGCTCAACTAAATGTTAGCAACTAATGATAAGGGTTGCGCTCGTTGCGGGACTTAACCCAACATCTCACGACACGAGCTGACGACAACCATGCACCACCTGTCATCCTGTCCCCGAAGGGACTTCATCCATTACGGACTAATTCAGGAGATGTCAAGTCTAGGTAAGGTTCTTCGCGTTGCTTCGAATTAAACCACATGCTCCGCTGCTTGTGCGGGTCCCCGTCAATTCCTTTGAGTTTTAATCTTGCGACCGTACTTCCCAGGCGGAATACTTATTGTGTTAACTGCGGCACAGAAGGAGTCGATACCTCCTACACCTAGTATTCATCGTTTACGGCGTGGACTACCAGGGTATCTAATCCTGTTTGCTCCCCACGCTTTCATGCCTCAGCGTCAGTTACAGTCCAGAAGGCCGCCTTCGCCACTGGTATTCTTCCTAATCTCTACGCATTTCACCGCTACACTAGGAATTCTGCCTTCCTCTCCTGCACTCCAGACATCCAGTTTGAAATGCAGCCCCCAAGTTAAGCCCGGGGATTTCACATCTCACTTAAATATCCGCCTACACATCCTTTACGCCCAGTAAATCCGGACAACGCTTGCCACCTACGTATTACCGCGGCTGCTGGCACGTAGTTAGCCGTGGCTTCCTCCTATGGTACCGTCATTATCGTCCCATAAGACAGAGTTTTACGATCCGAAGACCTTCATCACTCACGCGGCGTTGCTGCATCAGGGTTTCCCCCATTGTGCAATATTCCCCACTGCTGCCTCCCGTAGGAGTCTGGACCGTGTCTCAGTTCCAATGTGGCCGATCACCCTCTCAGGTCGGCTACGCATCGAAGCCTTGGTGAGCCGTTACCTCACCAACAAGCTAATGCGCCGCGGGTCCATCTCATAGCGAATAAATCCTTTGGCTCAAGAATCATGCGATTCTCGAGTATTATGCGGTATTAATCTTCCTTTCGAAAGGCTATTCCCCACTATGAGGTAGGTTACCCACGTGTTACTCACCCGTCCGCCGCTGGGAACCGAAGTTCCCCGCTCGACTGC&#39;</span><span class="p">;</span>
+<span class="o">%</span><span class="n">a为公司给出的拼接结果</span>
+
+<span class="p">[</span><span class="o">~</span><span class="p">,</span><span class="n">Alignment</span><span class="p">]</span><span class="o">=</span><span class="n">nwalign</span><span class="p">(</span><span class="n">seq_total</span><span class="p">,</span><span class="n">seqrcomplement</span><span class="p">(</span><span class="n">a</span><span class="p">));</span>
+<span class="n">seqalignviewer</span><span class="p">(</span><span class="n">Alignment</span><span class="p">);</span>
+</pre></div>
+</div>
+<ul class="simple">
+<li><p>a为公司拼接的结果，seq_total为使用我们的算法计算出的结果</p></li>
+<li><p>可以看出，公司给出的拼接结果少了一个T，并且两端均少了很多碱基（如右边减少了16个碱基）</p></li>
+</ul>
+</div>
+<div class="section" id="atcc-824">
+<h3>4.2 利用ATCC 824序列进行比对<a class="headerlink" href="#atcc-824" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">fasta_download</span><span class="p">(</span><span class="s1">&#39;NR_074511.2&#39;</span><span class="p">);</span>
+<span class="n">seq</span><span class="o">=</span><span class="n">fastaread</span><span class="p">([</span><span class="s1">&#39;NR_074511.2&#39;</span><span class="p">,</span><span class="s1">&#39;.fasta&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">Sequence</span>
+<span class="p">[</span><span class="n">Score1</span><span class="p">,</span><span class="n">Alignment1</span><span class="p">]</span><span class="o">=</span><span class="n">nwalign</span><span class="p">(</span><span class="n">seq_total</span><span class="p">,</span><span class="n">seq</span><span class="p">);</span>
+<span class="n">seqalignviewer</span><span class="p">(</span><span class="n">Alignment1</span><span class="p">)</span>
+
+
+<span class="p">[</span><span class="n">Score2</span><span class="p">,</span><span class="n">Alignment2</span><span class="p">]</span><span class="o">=</span><span class="n">nwalign</span><span class="p">(</span><span class="n">seqrcomplement</span><span class="p">(</span><span class="n">a</span><span class="p">),</span><span class="n">seq</span><span class="p">);</span>
+<span class="n">seqalignviewer</span><span class="p">(</span><span class="n">Alignment2</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>说明：</strong></p>
+<ol class="upperalpha simple">
+<li><p>fast_download为我们开发的序列文件自动下载程序，见：<a class="reference external" href="https://mtc.readthedocs.io/en/latest/Gene/Primer_blast.html#efetchncbi">https://mtc.readthedocs.io/en/latest/Gene/Primer_blast.html#efetchncbi</a></p></li>
+<li><p>通过对比可以返现，我们的拼接结果优于公司结果，但是该序列仍旧与MTCC 824的16s序列有差异；</p></li>
+<li><p><strong>公司对上述差异给出的解释是：16s测序时，当开始的前30个序列检测是不准确的，因此在分析数据是，会直接将两条链的前30左右碱基去掉</strong></p></li>
+</ol>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Readthedocs维护/index.html" class="btn btn-neutral float-right" title="Technologies for the Readthedocs website maintenance!" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Primer_blast.html" class="btn btn-neutral float-left" title="Primer_blast算法实现" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, MTC Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
