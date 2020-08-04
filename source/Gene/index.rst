@@ -3,18 +3,17 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Welcome to MTC's documentation!
+Document for Gene Manipulation
 ===============================
 
 .. toctree::
    :maxdepth: 2
    :caption: Contents
    
-   Gene/index
+   Primer_blast
 
-.. image:: logo.jpg
-   :align: center
-   :width: 200px
+
+
 
 Indices and tables
 ==================

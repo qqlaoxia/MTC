@@ -1,0 +1,512 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.自己搭建efetch自动下载ncbi上的核酸序列 &mdash; MTC 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="prev" title="Document for Gene Manipulation" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> MTC
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">Document for Gene Manipulation</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.自己搭建efetch自动下载ncbi上的核酸序列</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#id1">3. 自动下载序列并检测结果</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="index.html#indices-and-tables">Indices and tables</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MTC</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">Document for Gene Manipulation</a> &raquo;</li>
+        
+      <li>2.自己搭建efetch自动下载ncbi上的核酸序列</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Gene/Primer_blast.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <p>知识记录： ### 1. 进行16s核糖体测序 1. 我们采用了通用引物，进行16s
+RNA的研究 具体的信息为:27f 1492r</p>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 25%" />
+<col style="width: 75%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>序列名称</p></th>
+<th class="head"><p>序列内容</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>前引物链</p></td>
+<td><p>‘AGAGTTTGATCCTGGCTCAG’</p></td>
+</tr>
+<tr class="row-odd"><td><p>后引物链</p></td>
+<td><p>‘TACGGCTACCTTGTTACGACTT’</p></td>
+</tr>
+</tbody>
+</table>
+<blockquote>
+<div><p>本程序实现了ncbi中primer_blast的核心功能</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>function [Right_result,Wrong_result]=primer_blast_xia(seq,a,b)
+% 本函数实现了NCBI中primer_blast的功能
+%
+% seq为序列，a为前引物，b为后引物
+%
+% Right_result为正确的序列，Wrong_result为包含所有的可能组合（假想的，错误的序列几乎不太会在真实试验中出现）
+%
+% Copywrite: MTC, 2020.7,Version 1.0, Written by Ray
+%
+% see also: seqrcomplement, strfind, seqcomplement
+
+b1=seqrcomplement(b);
+po1=strfind(seq,a);
+po2=strfind(seq,b1);
+% 一般情况下，两者是一一对应的，为了考虑极端情况，我们做个循环处理
+Right_result=[];
+Wrong_result=[];
+
+for i=1:length(po1)
+  po_temp=min(po2(po2&gt;po1(i)));
+  Right_result=[Right_result;po1(i), po_temp+length(b1)-1];
+end
+
+for i=1:length(po1)
+  po_temp=po2(po2&gt;po1(i));
+  for jj=1:length(po_temp)
+      Wrong_result=[Wrong_result;po1(1),po_temp(jj)+length(b1)-1];
+  end
+end
+end
+</pre></div>
+</div>
+<div class="section" id="efetchncbi">
+<h1>2.自己搭建efetch自动下载ncbi上的核酸序列<a class="headerlink" href="#efetchncbi" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>利用efetch函数，实现了ncbi上基因数据的自动下载
+<a class="reference external" href="https://www.ncbi.nlm.nih.gov/books/NBK25501/">https://www.ncbi.nlm.nih.gov/books/NBK25501/</a> NCBI上关于API的介绍</p>
+</div></blockquote>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">function</span> <span class="n">fasta_download</span><span class="p">(</span><span class="n">ID</span><span class="p">)</span>
+<span class="n">url_base</span><span class="o">=</span><span class="s1">&#39;https://eutils.ncbi.nlm.nih.gov/entrez/eutils/efetch.fcgi?db=nucleotide&amp;id=</span><span class="si">%s</span><span class="s1">&amp;rettype=fasta&amp;retmode=text&#39;</span><span class="p">;</span>
+<span class="n">url</span><span class="o">=</span><span class="n">sprintf</span><span class="p">(</span><span class="n">url_base</span><span class="p">,</span><span class="n">ID</span><span class="p">);</span>
+<span class="n">websave</span><span class="p">([</span><span class="n">ID</span><span class="p">,</span><span class="s1">&#39;.fasta&#39;</span><span class="p">],</span><span class="n">url</span><span class="p">);</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h1>3. 自动下载序列并检测结果<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<table class="docutils align-default">
+<colgroup>
+<col style="width: 27%" />
+<col style="width: 73%" />
+</colgroup>
+<thead>
+<tr class="row-odd"><th class="head"><p>序列</p></th>
+<th class="head"><p>基因号</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>1</p></td>
+<td><p>NR_074511.2</p></td>
+</tr>
+<tr class="row-odd"><td><p>2</p></td>
+<td><p>KC166235.1</p></td>
+</tr>
+<tr class="row-even"><td><p>3</p></td>
+<td><p>AB675522.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>4</p></td>
+<td><p>AB675515.1</p></td>
+</tr>
+<tr class="row-even"><td><p>5</p></td>
+<td><p>CP002660.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>6</p></td>
+<td><p>CP002118.1</p></td>
+</tr>
+<tr class="row-even"><td><p>7</p></td>
+<td><p>NR_113246.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>8</p></td>
+<td><p>AE001437.1</p></td>
+</tr>
+<tr class="row-even"><td><p>9</p></td>
+<td><p>AM231184.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>10</p></td>
+<td><p>NR_118784.1</p></td>
+</tr>
+<tr class="row-even"><td><p>11</p></td>
+<td><p>X78071.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>12</p></td>
+<td><p>AM231182.1</p></td>
+</tr>
+<tr class="row-even"><td><p>13</p></td>
+<td><p>AM231183.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>14</p></td>
+<td><p>AB678231.1</p></td>
+</tr>
+<tr class="row-even"><td><p>15</p></td>
+<td><p>KU891982.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>16</p></td>
+<td><p>MH538942.1</p></td>
+</tr>
+<tr class="row-even"><td><p>17</p></td>
+<td><p>KT897715.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>18</p></td>
+<td><p>NR_119091.1</p></td>
+</tr>
+<tr class="row-even"><td><p>19</p></td>
+<td><p>X78072.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>20</p></td>
+<td><p>MT357013.1</p></td>
+</tr>
+<tr class="row-even"><td><p>21</p></td>
+<td><p>MT357001.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>22</p></td>
+<td><p>FM994940.1</p></td>
+</tr>
+<tr class="row-even"><td><p>23</p></td>
+<td><p>KJ951058.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>24</p></td>
+<td><p>KR080514.1</p></td>
+</tr>
+<tr class="row-even"><td><p>25</p></td>
+<td><p>KR056086.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>26</p></td>
+<td><p>KC969670.1</p></td>
+</tr>
+<tr class="row-even"><td><p>27</p></td>
+<td><p>KF158795.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>28</p></td>
+<td><p>KJ951059.1</p></td>
+</tr>
+<tr class="row-even"><td><p>29</p></td>
+<td><p>KM975638.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>30</p></td>
+<td><p>X78073.1</p></td>
+</tr>
+<tr class="row-even"><td><p>31</p></td>
+<td><p>S46735.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>32</p></td>
+<td><p>FJ610237.1</p></td>
+</tr>
+<tr class="row-even"><td><p>33</p></td>
+<td><p>KP999982.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>34</p></td>
+<td><p>KT920407.1</p></td>
+</tr>
+<tr class="row-even"><td><p>35</p></td>
+<td><p>KP410579.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>36</p></td>
+<td><p>KR067608.1</p></td>
+</tr>
+<tr class="row-even"><td><p>37</p></td>
+<td><p>KR067610.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>38</p></td>
+<td><p>KP410577.1</p></td>
+</tr>
+<tr class="row-even"><td><p>39</p></td>
+<td><p>KP410575.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>40</p></td>
+<td><p>KT920409.1</p></td>
+</tr>
+<tr class="row-even"><td><p>41</p></td>
+<td><p>KT920408.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>42</p></td>
+<td><p>KR185842.1</p></td>
+</tr>
+<tr class="row-even"><td><p>43</p></td>
+<td><p>KP872298.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>44</p></td>
+<td><p>KR185879.1</p></td>
+</tr>
+<tr class="row-even"><td><p>45</p></td>
+<td><p>KP410578.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>46</p></td>
+<td><p>MK463634.1</p></td>
+</tr>
+<tr class="row-even"><td><p>47</p></td>
+<td><p>KR011769.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>48</p></td>
+<td><p>JQ086380.1</p></td>
+</tr>
+<tr class="row-even"><td><p>49</p></td>
+<td><p>KR185871.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>50</p></td>
+<td><p>MK463632.1</p></td>
+</tr>
+<tr class="row-even"><td><p>51</p></td>
+<td><p>KP410576.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>52</p></td>
+<td><p>KT321978.1</p></td>
+</tr>
+<tr class="row-even"><td><p>53</p></td>
+<td><p>KT321976.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>54</p></td>
+<td><p>U17030.1</p></td>
+</tr>
+<tr class="row-even"><td><p>55</p></td>
+<td><p>KP872300.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>56</p></td>
+<td><p>U16164.1</p></td>
+</tr>
+<tr class="row-even"><td><p>57</p></td>
+<td><p>KF176994.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>58</p></td>
+<td><p>MH109372.1</p></td>
+</tr>
+<tr class="row-even"><td><p>59</p></td>
+<td><p>KF176995.1</p></td>
+</tr>
+<tr class="row-odd"><td><p>60</p></td>
+<td><p>KT321977.1</p></td>
+</tr>
+</tbody>
+</table>
+<p>以下为分析代码 这些基因保存为data</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">fasta_download</span><span class="p">(</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">});</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s1">&#39;第</span><span class="si">%d</span><span class="s1">个下载完毕</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">pause</span><span class="p">(</span><span class="mf">0.5</span><span class="p">);</span>
+<span class="n">end</span>
+
+<span class="n">a</span><span class="o">=</span><span class="s1">&#39;AGAGTTTGATCCTGGCTCAG&#39;</span><span class="p">;</span> <span class="o">%</span><span class="n">正义链</span>
+<span class="n">b</span><span class="o">=</span><span class="s1">&#39;TACGGCTACCTTGTTACGACTT&#39;</span><span class="p">;</span> <span class="o">%</span><span class="n">反义链</span>
+
+<span class="n">Res</span><span class="o">=</span><span class="p">[];</span>
+<span class="n">Res1</span><span class="o">=</span><span class="p">[];</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="k">try</span>
+        <span class="n">seq</span><span class="o">=</span><span class="n">fastaread</span><span class="p">([</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">},</span><span class="s1">&#39;.fasta&#39;</span><span class="p">])</span><span class="o">.</span><span class="n">Sequence</span><span class="p">;</span>
+        <span class="p">[</span><span class="n">Right_result</span><span class="p">,</span><span class="n">Wrong_result</span><span class="p">]</span><span class="o">=</span><span class="n">primer_blast_xia</span><span class="p">(</span><span class="n">seq</span><span class="p">,</span><span class="n">a</span><span class="p">,</span><span class="n">b</span><span class="p">);</span>
+        <span class="n">Res</span><span class="o">=</span><span class="p">[</span><span class="n">Res</span><span class="p">;</span><span class="n">Right_result</span><span class="p">];</span>
+        <span class="n">Res1</span><span class="o">=</span><span class="p">[</span><span class="n">Res1</span><span class="p">;</span><span class="n">Wrong_result</span><span class="p">];</span>
+        <span class="p">[</span><span class="n">Right_result</span><span class="p">,</span><span class="o">~</span><span class="p">]</span><span class="o">=</span><span class="n">primer_blast_xia</span><span class="p">(</span><span class="n">seqrcomplement</span><span class="p">(</span><span class="n">seq</span><span class="p">),</span><span class="n">b</span><span class="p">,</span><span class="n">a</span><span class="p">);</span>
+        <span class="n">Res</span><span class="o">=</span><span class="p">[</span><span class="n">Res</span><span class="p">;</span><span class="n">Right_result</span><span class="p">];</span>
+        <span class="n">Res1</span><span class="o">=</span><span class="p">[</span><span class="n">Res1</span><span class="p">;</span><span class="n">Wrong_result</span><span class="p">];</span>
+    <span class="n">catch</span> <span class="n">ME</span>
+        <span class="n">fprintf</span><span class="p">(</span><span class="s1">&#39;该序列有错:</span><span class="si">%d</span><span class="se">\n</span><span class="s1">&#39;</span><span class="p">,</span><span class="n">i</span><span class="p">)</span>
+    <span class="n">end</span>
+<span class="n">end</span>
+<span class="n">data2</span><span class="o">=</span><span class="n">Res</span><span class="p">(:,</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">Res</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">unique</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+
+<span class="n">data3</span><span class="o">=</span><span class="n">Res1</span><span class="p">(:,</span><span class="mi">2</span><span class="p">)</span><span class="o">-</span><span class="n">Res1</span><span class="p">(:,</span><span class="mi">1</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+<span class="n">unique</span><span class="p">(</span><span class="n">data3</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="Document for Gene Manipulation" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, MTC Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
