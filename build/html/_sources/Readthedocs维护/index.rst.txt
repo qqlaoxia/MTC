@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Readthedocs构建与维护技巧
+3. Readthedocs构建与维护技巧
 =============================================================
 
 
@@ -11,5 +11,5 @@ Readthedocs构建与维护技巧
    :maxdepth: 2
    :caption: Contents
    
-   Readthedocs维护/FAQ.rst
+   FAQ.rst
 

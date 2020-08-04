@@ -1,11 +1,14 @@
-1. 官方网站
------------
+3.1 导入readthedocs常见问题
+================================
+
+1.1 官方网站
+------------
 
 -  https://www.sphinx-doc.org/en/master/usage/configuration.html?highlight=master_doc
 -  https://docs.readthedocs.io/en/stable/config-file/v2.html#sphinx
 
-2. 主文件夹中需要添加一个readthedocs.yml文件
---------------------------------------------
+1.2 主文件夹中需要添加一个readthedocs.yml文件
+---------------------------------------------
 
 可以如下添加：
 
@@ -19,8 +22,8 @@
 
 参考网址：https://docs.readthedocs.io/en/stable/config-file/v2.html
 
-3. 在配置过程中，出现WARNING: html_static_path 警告而导致失败
--------------------------------------------------------------
+1.3 在配置过程中，出现WARNING: html_static_path 警告而导致失败
+--------------------------------------------------------------
 
 解决方案：将con.py文件中的
 
@@ -36,8 +39,8 @@
 
 参考网址：https://github.com/readthedocs/readthedocs.org/issues/1776
 
-4.配制文件模板
-~~~~~~~~~~~~~~
+1.4配制文件模板
+---------------
 
 本网站文件内容：
 
@@ -107,8 +110,5 @@
    source_suffix = ['.rst', '.md']
    html_search_language = 'zh'
 
-
-官网给出的一个典型con.py文件
-
+**官网给出的一个典型con.py文件：**
 https://www.sphinx-doc.org/en/master/usage/configuration.html?highlight=master_doc
-
