@@ -3,12 +3,9 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-1.基因操作与合成生物学
-===============================
-
+2. Matlab编程技术与应用
+====================================
 .. toctree::
    :maxdepth: 2
-
    
-   Primer_blast
-   16s_sequence_assembly.rst
+   Words_replace_in_MS_Word.md

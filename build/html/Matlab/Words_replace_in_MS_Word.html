@@ -1,0 +1,374 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.1 利用matlab实现word中文字自动替换 &mdash; MTC 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="Readthedocs构建与维护技巧" href="../Readthedocs维护/index.html" />
+    <link rel="prev" title="2. Matlab编程技术与应用" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> MTC
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Gene/index.html">1.基因操作与合成生物学</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. Matlab编程技术与应用</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1 利用matlab实现word中文字自动替换</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1. 附录编号自动提取</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2. 含多附录编号的快速提取</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">3.添加括号</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">4.利用冒泡法合并求解元素集合</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#word">4.word中内容替换（核心）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">5.编号自动排列</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Readthedocs维护/index.html">Readthedocs构建与维护技巧</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MTC</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">2. Matlab编程技术与应用</a> &raquo;</li>
+        
+      <li>2.1 利用matlab实现word中文字自动替换</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Matlab/Words_replace_in_MS_Word.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="matlabword">
+<h1>2.1 利用matlab实现word中文字自动替换<a class="headerlink" href="#matlabword" title="Permalink to this headline">¶</a></h1>
+<blockquote>
+<div><p>本程序记录了2020年学院工程认证中，附件材料替换的小程序。由于比较简单，不做详细解释，仅留作记录，供未来工作中参考。</p>
+</div></blockquote>
+<div class="section" id="id1">
+<h2>1. 附录编号自动提取<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">附录编号提取2</span>
+<span class="n">data2</span><span class="o">=</span><span class="p">{};</span>
+<span class="n">Num</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">expression</span> <span class="o">=</span><span class="s1">&#39;[0-9]-[0-9]-[0-9]{1,2}&#39;</span>
+    <span class="n">matchStr</span> <span class="o">=</span> <span class="n">regexp</span><span class="p">(</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="n">expression</span><span class="p">,</span><span class="s1">&#39;match&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">length</span><span class="p">(</span><span class="n">matchStr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">0</span>
+        <span class="n">Num</span><span class="o">=</span><span class="n">Num</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+        <span class="n">data2</span><span class="p">{</span><span class="n">Num</span><span class="p">,</span><span class="mi">1</span><span class="p">}</span><span class="o">=</span><span class="n">matchStr</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+
+    <span class="n">end</span>
+<span class="n">end</span>
+
+<span class="n">data</span><span class="o">=</span><span class="n">data2</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>2. 含多附录编号的快速提取<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span><span class="o">=</span><span class="p">{};</span>
+<span class="n">Num</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">expression</span> <span class="o">=</span><span class="s1">&#39;[0-9]-[0-9]-[0-9]{1,2}&#39;</span>
+    <span class="n">matchStr</span> <span class="o">=</span> <span class="n">regexp</span><span class="p">(</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="n">expression</span><span class="p">,</span><span class="s1">&#39;match&#39;</span><span class="p">)</span>
+    <span class="k">if</span> <span class="n">length</span><span class="p">(</span><span class="n">matchStr</span><span class="p">)</span> <span class="o">&gt;</span> <span class="mi">1</span>
+        <span class="n">Num</span><span class="o">=</span><span class="n">Num</span><span class="o">+</span><span class="mi">1</span>
+       <span class="k">for</span> <span class="n">jj</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">matchStr</span><span class="p">)</span>
+           <span class="n">data2</span><span class="p">{</span><span class="n">Num</span><span class="p">,</span><span class="n">jj</span><span class="p">}</span><span class="o">=</span><span class="n">matchStr</span><span class="p">{</span><span class="n">jj</span><span class="p">};</span>
+       <span class="n">end</span>
+       <span class="n">end</span>
+<span class="n">end</span>
+
+<span class="n">data</span><span class="o">=</span><span class="n">data2</span><span class="p">;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id3">
+<h2>3.添加括号<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">加括号</span>
+<span class="n">data</span><span class="o">=</span><span class="n">cellfun</span><span class="p">(</span><span class="nd">@black_add</span><span class="p">,</span><span class="n">data</span><span class="p">)</span>
+
+
+<span class="n">function</span> <span class="p">[</span><span class="n">x</span><span class="p">]</span> <span class="o">=</span> <span class="n">black_add</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+<span class="o">%</span><span class="n">BLACK_ADD</span> <span class="n">此处显示有关此函数的摘要</span>
+<span class="o">%</span>   <span class="n">此处显示详细说明</span>
+<span class="k">if</span> <span class="n">x</span> <span class="o">~=</span><span class="mi">0</span>
+    <span class="n">x</span><span class="o">=</span><span class="p">[</span><span class="n">x</span><span class="p">,</span><span class="s1">&#39;）&#39;</span><span class="p">];</span>
+<span class="k">else</span>
+    <span class="n">x</span><span class="o">=</span><span class="n">x</span><span class="p">;</span>
+<span class="n">end</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>4.利用冒泡法合并求解元素集合<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">元素去重</span><span class="o">--</span><span class="n">方法3</span>
+<span class="o">%</span><span class="n">将data转化为字符串数组</span><span class="o">--</span><span class="n">非常关键</span>
+<span class="n">data</span><span class="o">=</span><span class="n">cellfun</span><span class="p">(</span><span class="nd">@string</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="s1">&#39;UniformOutput&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">);</span>
+<span class="n">data2</span><span class="o">=</span><span class="p">{};</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="n">data2</span><span class="p">{</span><span class="n">i</span><span class="p">}</span><span class="o">=</span><span class="p">[</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="mi">2</span><span class="p">}];</span>
+<span class="n">end</span>
+
+
+<span class="o">%</span> <span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="n">length</span><span class="p">(</span><span class="n">data2</span><span class="p">):</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">2</span>
+<span class="o">%</span>     <span class="n">cont1</span><span class="o">=</span><span class="n">data2</span><span class="p">{</span><span class="n">i</span><span class="p">};</span>
+<span class="o">%</span>     <span class="n">de</span><span class="o">=</span><span class="n">false</span>
+<span class="o">%</span>    <span class="k">for</span> <span class="n">jj</span><span class="o">=</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="o">-</span><span class="mi">1</span><span class="p">:</span><span class="mi">1</span>
+<span class="o">%</span>        <span class="k">if</span> <span class="o">~</span><span class="n">isempty</span><span class="p">(</span><span class="n">intersect</span><span class="p">(</span><span class="n">cont1</span><span class="p">,</span><span class="n">data2</span><span class="p">{</span><span class="n">jj</span><span class="p">}))</span>
+<span class="o">%</span>            <span class="n">data2</span><span class="p">{</span><span class="n">jj</span><span class="p">}</span><span class="o">=</span><span class="n">union</span><span class="p">(</span><span class="n">cont1</span><span class="p">,</span><span class="n">data2</span><span class="p">{</span><span class="n">jj</span><span class="p">})</span>
+<span class="o">%</span>            <span class="n">de</span><span class="o">=</span><span class="n">true</span>
+<span class="o">%</span>        <span class="n">end</span>
+<span class="o">%</span>    <span class="n">end</span>
+<span class="o">%</span>    <span class="k">if</span> <span class="n">de</span><span class="o">==</span><span class="n">true</span>
+<span class="o">%</span>    <span class="n">data2</span><span class="p">(</span><span class="n">i</span><span class="p">)</span><span class="o">=</span><span class="p">[];</span>
+<span class="o">%</span>    <span class="n">end</span>
+<span class="o">%</span> <span class="n">end</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="mi">10</span>
+    <span class="n">data2</span> <span class="o">=</span> <span class="n">Union_xia</span><span class="p">(</span><span class="n">data2</span><span class="p">);</span>
+<span class="n">end</span>
+
+<span class="n">save</span> <span class="n">xia</span><span class="o">.</span><span class="n">mat</span> <span class="n">data2</span>
+
+<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">data2</span><span class="p">)</span>
+    <span class="n">xlswrite</span><span class="p">(</span><span class="s1">&#39;xia2.xlsx&#39;</span><span class="p">,</span><span class="n">data2</span><span class="p">{</span><span class="n">i</span><span class="p">},</span><span class="s1">&#39;Sheet1&#39;</span><span class="p">,[</span><span class="s1">&#39;A&#39;</span><span class="p">,</span><span class="n">num2str</span><span class="p">(</span><span class="n">i</span><span class="p">)]);</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="word">
+<h2>4.word中内容替换（核心）<a class="headerlink" href="#word" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tic</span>
+<span class="n">w</span><span class="o">=</span><span class="n">actxserver</span><span class="p">(</span><span class="s1">&#39;Word.Application&#39;</span><span class="p">);</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">w</span><span class="o">.</span><span class="n">DisplayAlerts</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Documents</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s1">&#39;F:\天津科技大学\日常工作</span><span class="se">\202</span><span class="s1">0</span><span class="se">\1</span><span class="s1">月份\工程认证\最终材料</span><span class="se">\202</span><span class="s1">0-7-29 版本\报告正文\自评报告正文-20200729--夏梦雷修订.docx&#39;</span><span class="p">);</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">ClearFormatting</span><span class="p">();</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">Replacement</span><span class="o">.</span><span class="n">ClearFormatting</span><span class="p">();</span>
+<span class="k">for</span> <span class="n">i</span><span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">size</span><span class="p">(</span><span class="n">data</span><span class="p">,</span><span class="mi">1</span><span class="p">)</span>
+    <span class="k">for</span> <span class="n">jj</span><span class="o">=</span><span class="mi">2</span><span class="p">:</span><span class="mi">5</span>
+        <span class="k">if</span> <span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="n">jj</span><span class="p">}</span> <span class="o">~=</span><span class="mi">0</span>
+        <span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="n">jj</span><span class="p">},</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">false</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="n">true</span><span class="p">,</span> <span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">},</span> <span class="mi">2</span><span class="p">);</span>
+        <span class="n">disp</span><span class="p">(</span><span class="n">sprintf</span><span class="p">(</span><span class="s1">&#39;</span><span class="si">%s</span><span class="s1">→</span><span class="si">%s</span><span class="s1">：替换完毕&#39;</span><span class="p">,</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="n">jj</span><span class="p">},</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">,</span><span class="mi">1</span><span class="p">}))</span>
+        <span class="n">end</span>
+    <span class="n">end</span>
+<span class="n">end</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">SaveAs2</span><span class="p">(</span><span class="s1">&#39;F:\天津科技大学\日常工作</span><span class="se">\202</span><span class="s1">0</span><span class="se">\1</span><span class="s1">月份\工程认证\最终材料</span><span class="se">\202</span><span class="s1">0-7-29 版本\报告正文\自评报告正文-20200729--夏梦雷修订.docx&#39;</span><span class="p">);</span>
+<span class="n">doc</span><span class="o">.</span><span class="n">Close</span><span class="p">();</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Quit</span><span class="p">();</span>
+<span class="n">toc</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h2>5.编号自动排列<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">确保第一项是从1开始的</span>
+<span class="n">cont1</span><span class="o">=</span><span class="n">data</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
+<span class="n">po1</span><span class="o">=</span><span class="n">strfind</span><span class="p">(</span><span class="n">cont1</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">);</span>
+<span class="k">if</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">cont1</span><span class="p">(</span><span class="n">po1</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span><span class="o">+</span><span class="mi">1</span><span class="p">:</span><span class="n">end</span><span class="p">),</span><span class="s1">&#39;1&#39;</span><span class="p">)</span>
+    <span class="n">data</span><span class="p">{</span><span class="mi">1</span><span class="p">}</span><span class="o">=</span><span class="p">[</span><span class="n">cont1</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">po1</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span><span class="s1">&#39;1&#39;</span><span class="p">];</span>
+<span class="n">end</span>
+
+<span class="n">Num</span><span class="o">=</span><span class="mi">1</span>
+<span class="k">for</span> <span class="n">i</span> <span class="o">=</span><span class="mi">2</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
+    <span class="n">cont1</span><span class="o">=</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="o">-</span><span class="mi">1</span><span class="p">};</span>
+    <span class="n">cont2</span><span class="o">=</span><span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">};</span>
+    <span class="n">po1</span><span class="o">=</span><span class="n">strfind</span><span class="p">(</span><span class="n">cont1</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">);</span>
+    <span class="n">po2</span><span class="o">=</span><span class="n">strfind</span><span class="p">(</span><span class="n">cont2</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">);</span>
+
+    <span class="k">if</span> <span class="n">strcmp</span><span class="p">(</span><span class="n">cont1</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">po1</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span><span class="n">cont2</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">po2</span><span class="p">(</span><span class="mi">2</span><span class="p">)))</span>
+        <span class="n">Num</span><span class="o">=</span><span class="n">Num</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="k">else</span>
+        <span class="n">Num</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">end</span>
+     <span class="n">data</span><span class="p">{</span><span class="n">i</span><span class="p">}</span><span class="o">=</span><span class="p">[</span><span class="n">cont2</span><span class="p">(</span><span class="mi">1</span><span class="p">:</span><span class="n">po2</span><span class="p">(</span><span class="mi">2</span><span class="p">)),</span><span class="n">num2str</span><span class="p">(</span><span class="n">Num</span><span class="p">)]</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Readthedocs维护/index.html" class="btn btn-neutral float-right" title="Readthedocs构建与维护技巧" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="2. Matlab编程技术与应用" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, MTC Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>

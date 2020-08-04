@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-Technologies for the Readthedocs website maintenance!
+Readthedocs构建与维护技巧
 =============================================================
 
 

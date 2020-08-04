@@ -11,6 +11,7 @@ Welcome to MTC's documentation!
    :caption: Contents
    
    Gene/index
+   Matlab/index
    Readthedocs维护/index
 
 
