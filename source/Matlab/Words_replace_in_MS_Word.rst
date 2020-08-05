@@ -151,4 +151,12 @@
         end
          data{i}=[cont2(1:po2(2)),num2str(Num)]
     end
+	
+6. 本技术介绍视频
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
+.. raw:: html
+
+    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+        <iframe src="https://player.bilibili.com/player.html?aid=329031250&bvid=BV1MA411Y7EB&cid=217805774&page=1" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+    </div>
