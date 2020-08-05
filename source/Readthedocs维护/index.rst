@@ -12,4 +12,5 @@
    :caption: Contents
    
    FAQ.rst
+   Video_add.rst
 
