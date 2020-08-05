@@ -14,4 +14,5 @@
    FAQ.rst
    Video_add.rst
    rst2md
+   Commonly_used_template
 
