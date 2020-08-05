@@ -13,4 +13,5 @@
    
    FAQ.rst
    Video_add.rst
+   rst2md
 
