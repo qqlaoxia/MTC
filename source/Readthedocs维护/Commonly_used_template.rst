@@ -171,3 +171,8 @@
 
       doc_1
       doc_2
+	  
+
+1.4 兼容Jupyter Notebook
+--------------------------
+可以参考官网：https://nbsphinx.readthedocs.io/en/guzzle-theme/
