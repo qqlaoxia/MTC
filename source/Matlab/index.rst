@@ -8,4 +8,5 @@
 .. toctree::
    :maxdepth: 2
    
-   Words_replace_in_MS_Word.md
+   Words_replace_in_MS_Word
+   Word_position

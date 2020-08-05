@@ -1,0 +1,390 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>2.2 利用matlab快速定位文字位置 &mdash; MTC 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="3. Readthedocs构建与维护技巧" href="../Readthedocs维护/index.html" />
+    <link rel="prev" title="2.1 利用matlab实现word中文字自动替换" href="Words_replace_in_MS_Word.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> MTC
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <p class="caption"><span class="caption-text">Contents</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="../Gene/index.html">1.基因操作与合成生物学</a></li>
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">2. Matlab编程技术与应用</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="Words_replace_in_MS_Word.html">2.1 利用matlab实现word中文字自动替换</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.2 利用matlab快速定位文字位置</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#vba">1. 我们首先从vba开始</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#python-matlab">2. python/matlab版本</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#pythonmatlab">3. 完整的python版本和matlab版本</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#python">3.1 python版本</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id1">3.2 Matlab版本</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">总结：</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">4. 本技术讲解视频</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Readthedocs维护/index.html">3. Readthedocs构建与维护技巧</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MTC</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html">2. Matlab编程技术与应用</a> &raquo;</li>
+        
+      <li>2.2 利用matlab快速定位文字位置</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/Matlab/Word_position.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="matlab">
+<h1>2.2 利用matlab快速定位文字位置<a class="headerlink" href="#matlab" title="Permalink to this headline">¶</a></h1>
+<p>本网页介绍了如何利用vba实现字符串的查找，并生成其位置
+必须知道的网址： 微软的vba语法手册 -
+<a class="reference external" href="https://docs.microsoft.com/zh-cn/office/vba/api/word.wdinformation">https://docs.microsoft.com/zh-cn/office/vba/api/word.wdinformation</a> -
+<a class="reference external" href="https://docs.microsoft.com/en-us/previous-versions/office/developer/office-2003/aa211923(v=office.11">https://docs.microsoft.com/en-us/previous-versions/office/developer/office-2003/aa211923(v=office.11</a>)</p>
+<div class="section" id="vba">
+<h2>1. 我们首先从vba开始<a class="headerlink" href="#vba" title="Permalink to this headline">¶</a></h2>
+<p>版本1： 网址 <a class="reference external" href="https://zhidao.baidu.com/question/2011085583766233188.html">https://zhidao.baidu.com/question/2011085583766233188.html</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Private</span> <span class="n">Sub</span> <span class="n">CommandButton1_Click</span><span class="p">()</span>
+   <span class="n">Dim</span> <span class="n">p</span><span class="p">,</span> <span class="n">r</span><span class="p">,</span> <span class="n">s</span><span class="p">,</span> <span class="n">t</span>
+    <span class="n">s</span><span class="o">=</span> <span class="s2">&quot;石膏板造bai型顶&quot;</span>
+   <span class="n">With</span> <span class="n">Selection</span><span class="o">.</span><span class="n">Find</span>
+       <span class="o">.</span><span class="n">ClearFormatting</span>
+       <span class="o">.</span><span class="n">MatchWholeWord</span> <span class="o">=</span> <span class="kc">True</span>
+       <span class="o">.</span><span class="n">MatchCase</span> <span class="o">=</span> <span class="kc">False</span>
+       <span class="n">t</span> <span class="o">=</span> <span class="o">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">FindText</span><span class="p">:</span><span class="o">=</span><span class="n">s</span><span class="p">)</span>
+   <span class="n">End</span> <span class="n">With</span>
+    <span class="n">p</span><span class="o">=</span> <span class="n">Selection</span><span class="o">.</span><span class="n">Information</span><span class="p">(</span><span class="n">wdActiveEndPageNumber</span><span class="p">)</span>
+    <span class="n">r</span><span class="o">=</span> <span class="n">Selection</span><span class="o">.</span><span class="n">Information</span><span class="p">(</span><span class="n">wdFirstCharacterLineNumber</span><span class="p">)</span>
+   <span class="n">If</span> <span class="n">t</span> <span class="n">Then</span>
+       <span class="n">MsgBox</span> <span class="s2">&quot;成功，已找到du“&quot;</span> <span class="o">&amp;</span> <span class="n">s</span> <span class="o">&amp;</span> <span class="s2">&quot;”&quot;</span> <span class="o">&amp;</span> <span class="n">vbCrLf</span> <span class="o">&amp;</span> <span class="n">_</span>
+           <span class="s2">&quot;页码：&quot;</span><span class="o">&amp;</span> <span class="n">p</span> <span class="o">&amp;</span> <span class="n">vbCrLf</span> <span class="o">&amp;</span> <span class="s2">&quot;行数：zhi&quot;</span> <span class="o">&amp;</span> <span class="n">r</span><span class="p">,</span> <span class="n">vbOKOnly</span><span class="p">,</span> <span class="n">_</span>
+           <span class="s2">&quot;成功&quot;</span>
+   <span class="n">Else</span>
+       <span class="n">MsgBox</span> <span class="s2">&quot;很遗憾dao，没有找到“&quot;</span> <span class="o">&amp;</span> <span class="n">s</span> <span class="o">&amp;</span> <span class="s2">&quot;”&quot;</span><span class="p">,</span> <span class="n">vbOKOnly</span><span class="p">,</span> <span class="n">_</span>
+           <span class="s2">&quot;遗憾&quot;</span>
+   <span class="n">End</span> <span class="n">If</span>
+<span class="n">End</span> <span class="n">Sub</span>
+</pre></div>
+</div>
+<p>实例2：<a class="reference external" href="http://www.exceloffice.net/archives/3094">http://www.exceloffice.net/archives/3094</a></p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Sub</span> <span class="n">QQ1722187970</span><span class="p">()</span>
+    <span class="n">Const</span> <span class="n">wdActiveEndPageNumber</span> <span class="o">=</span> <span class="mi">3</span>
+    <span class="n">Const</span> <span class="n">wdGoToHeading</span> <span class="o">=</span> <span class="mi">11</span>
+    <span class="n">Const</span> <span class="n">wdGoToAbsolute</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">Const</span> <span class="n">wdGoToPage</span> <span class="o">=</span> <span class="mi">1</span>
+    <span class="n">Dim</span> <span class="n">oDoc</span> <span class="n">As</span> <span class="n">Document</span>
+    <span class="n">Dim</span> <span class="n">oWord</span> <span class="n">As</span> <span class="n">Word</span><span class="o">.</span><span class="n">Application</span>
+    <span class="n">Set</span> <span class="n">oWord</span> <span class="o">=</span> <span class="n">Word</span><span class="o">.</span><span class="n">Application</span>
+    <span class="n">Set</span> <span class="n">oDoc</span> <span class="o">=</span> <span class="n">oWord</span><span class="o">.</span><span class="n">ActiveDocument</span>
+    <span class="n">Dim</span> <span class="n">oRng</span> <span class="n">As</span> <span class="n">Range</span>
+    <span class="n">With</span> <span class="n">oDoc</span>
+        <span class="n">iMin</span> <span class="o">=</span> <span class="o">-</span><span class="mi">1</span>
+        <span class="n">I</span> <span class="o">=</span> <span class="mi">1</span>
+       <span class="n">Do</span>
+            <span class="s1">&#39;循环每个标题</span>
+            <span class="n">Set</span> <span class="n">oRng</span> <span class="o">=</span> <span class="o">.</span><span class="n">GoTo</span><span class="p">(</span><span class="n">wdGoToHeading</span><span class="p">,</span> <span class="n">wdGoToAbsolute</span><span class="p">,</span> <span class="n">I</span><span class="p">)</span>
+            <span class="s1">&#39;如果到底或者回到头则退出循环</span>
+            <span class="n">If</span> <span class="n">oRng</span><span class="o">.</span><span class="n">Start</span> <span class="o">&lt;</span> <span class="n">iMin</span> <span class="n">Or</span> <span class="n">oRng</span><span class="o">.</span><span class="n">Start</span> <span class="o">=</span> <span class="n">iMin</span> <span class="n">Then</span> <span class="n">Exit</span> <span class="n">Do</span>
+            <span class="s1">&#39;输出页码</span>
+             <span class="n">Debug</span><span class="o">.</span><span class="n">Print</span> <span class="n">oRng</span><span class="o">.</span><span class="n">Information</span><span class="p">(</span><span class="n">wdActiveEndPageNumber</span><span class="p">)</span>
+            <span class="n">iMin</span> <span class="o">=</span> <span class="n">oRng</span><span class="o">.</span><span class="n">Start</span>
+            <span class="n">I</span> <span class="o">=</span> <span class="n">I</span> <span class="o">+</span> <span class="mi">1</span>
+      <span class="n">Loop</span> <span class="n">Until</span> <span class="mi">1</span> <span class="o">&lt;&gt;</span> <span class="mi">1</span>
+    <span class="n">End</span> <span class="n">With</span>
+<span class="n">End</span> <span class="n">Sub</span>
+</pre></div>
+</div>
+<p>这是其他网友给出的vba版本，不在一一列举： -
+<a class="reference external" href="https://zhuanlan.zhihu.com/p/61358933">https://zhuanlan.zhihu.com/p/61358933</a> -
+<a class="reference external" href="http://www.360doc.com/content/18/0515/12/9261962_754100826.shtml">http://www.360doc.com/content/18/0515/12/9261962_754100826.shtml</a> -</p>
+</div>
+<div class="section" id="python-matlab">
+<h2>2. python/matlab版本<a class="headerlink" href="#python-matlab" title="Permalink to this headline">¶</a></h2>
+<p>我们已经知道，vba语法是微软制定的，它与使用matlab。
+如果我们直接将其翻译为python或matlab版本</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">win32com</span>
+
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;天津&quot;</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">win32com</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">Dispatch</span><span class="p">(</span><span class="s1">&#39;Word.Application&#39;</span><span class="p">)</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">w</span><span class="o">.</span><span class="n">DisplayAlerts</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Documents</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;F:\天津科技大学\日常工作\2020\1月份\工程认证\最终材料\2020-7-29 版本\报告正文\自评报告正文-20200729--夏梦雷修订.docx&#39;</span><span class="p">);</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">ClearFormatting</span><span class="p">();</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">Replacement</span><span class="o">.</span><span class="n">ClearFormatting</span><span class="p">();</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">MatchWholeWord</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">MatchCase</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">while</span> <span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">p</span><span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Information</span><span class="p">(</span><span class="n">wdActiveEndPageNumber</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>就会发现程序无法识别wdActiveEndPageNumber这个常量。</p>
+<p>有的网友给出了一个解决思路：
+<a class="reference external" href="https://stackoverflow.com/questions/24005664/finding-the-current-page-in-word-document">https://stackoverflow.com/questions/24005664/finding-the-current-page-in-word-document</a></p>
+<p>该网友认为：<strong>wdActiveEndPageNumber是win32com.client</strong>模块中的一个常量，在代码之前导入即可：</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">win32com.client.gencache</span> <span class="k">import</span> <span class="n">EnsureDispatch</span>
+<span class="kn">from</span> <span class="nn">win32com.client</span> <span class="k">import</span> <span class="n">constants</span>
+<span class="n">word</span> <span class="o">=</span> <span class="n">EnsureDispatch</span><span class="p">(</span><span class="s2">&quot;Word.Application&quot;</span><span class="p">)</span>
+<span class="n">mydoc</span> <span class="o">=</span> <span class="n">word</span><span class="o">.</span><span class="n">Documents</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s2">&quot;path:</span><span class="se">\\</span><span class="s2">to</span><span class="se">\\</span><span class="s2">file&quot;</span><span class="p">)</span>
+<span class="n">mydoc</span><span class="o">.</span><span class="n">ActiveWindow</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Information</span><span class="p">(</span><span class="n">constants</span><span class="o">.</span><span class="n">wdActiveEndPageNumber</span><span class="p">)</span>
+</pre></div>
+</div>
+<p><strong>这种思路也是错误的，python依旧无法识别该变量</strong>，其实该网页的第二个网友给出的思路是正确的，即：wdActiveEndPageNumber是个枚举值，是一个int值，只需要在vba中找到该值就行。</p>
+<p>在这种思路下，我们查找了微软的手册，以及部分网友的总结。
+重要的网址如下： -
+<a class="reference external" href="https://docs.microsoft.com/zh-cn/office/vba/api/word.wdinformation">https://docs.microsoft.com/zh-cn/office/vba/api/word.wdinformation</a></p>
+<p>可以看出，wdActiveEndPageNumber枚举类型对应的是3，因此把对应的符号改为3即可。</p>
+<p>值得注意的是，w.Selection.Find.Execute(s)至执行一次，也就是每次只执行以下，只需要做个循环，就可以把整个文档遍历完毕。</p>
+</div>
+<div class="section" id="pythonmatlab">
+<h2>3. 完整的python版本和matlab版本<a class="headerlink" href="#pythonmatlab" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="python">
+<h3>3.1 python版本<a class="headerlink" href="#python" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">win32com</span>
+
+
+<span class="n">s</span><span class="o">=</span><span class="s2">&quot;天津&quot;</span>
+<span class="n">w</span> <span class="o">=</span> <span class="n">win32com</span><span class="o">.</span><span class="n">client</span><span class="o">.</span><span class="n">Dispatch</span><span class="p">(</span><span class="s1">&#39;Word.Application&#39;</span><span class="p">)</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">w</span><span class="o">.</span><span class="n">DisplayAlerts</span> <span class="o">=</span> <span class="mi">0</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Documents</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="sa">r</span><span class="s1">&#39;F:\天津科技大学\日常工作\2020\1月份\工程认证\最终材料\2020-7-29 版本\报告正文\自评报告正文-20200729--夏梦雷修订.docx&#39;</span><span class="p">);</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">ClearFormatting</span><span class="p">()</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">Replacement</span><span class="o">.</span><span class="n">ClearFormatting</span><span class="p">()</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">MatchWholeWord</span> <span class="o">=</span> <span class="kc">True</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">MatchCase</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="k">while</span> <span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">s</span><span class="p">):</span>
+    <span class="n">p</span><span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Information</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="n">p</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id1">
+<h3>3.2 Matlab版本<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">s</span><span class="o">=</span><span class="s1">&#39;天津科技大学&#39;</span>
+<span class="n">w</span><span class="o">=</span><span class="n">actxserver</span><span class="p">(</span><span class="s1">&#39;Word.Application&#39;</span><span class="p">);</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">w</span><span class="o">.</span><span class="n">DisplayAlerts</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+<span class="n">doc</span> <span class="o">=</span> <span class="n">w</span><span class="o">.</span><span class="n">Documents</span><span class="o">.</span><span class="n">Open</span><span class="p">(</span><span class="s1">&#39;F:\天津科技大学\日常工作</span><span class="se">\202</span><span class="s1">0</span><span class="se">\1</span><span class="s1">月份\工程认证\最终材料</span><span class="se">\202</span><span class="s1">0-7-29 版本\报告正文\自评报告正文-20200729--夏梦雷修订.docx&#39;</span><span class="p">);</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">ClearFormatting</span><span class="p">();</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">Replacement</span><span class="o">.</span><span class="n">ClearFormatting</span><span class="p">();</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">MatchWholeWord</span> <span class="o">=</span> <span class="n">true</span>
+<span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">MatchCase</span> <span class="o">=</span> <span class="n">false</span>
+
+
+<span class="n">Num</span><span class="o">=</span><span class="mi">0</span>
+<span class="k">while</span><span class="p">(</span><span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Find</span><span class="o">.</span><span class="n">Execute</span><span class="p">(</span><span class="n">s</span><span class="p">))</span>
+    <span class="n">Num</span><span class="o">=</span><span class="n">Num</span><span class="o">+</span><span class="mi">1</span><span class="p">;</span>
+    <span class="n">fprintf</span><span class="p">(</span><span class="s1">&#39;运行了</span><span class="si">%d</span><span class="s1">次&#39;</span><span class="p">,</span><span class="n">Num</span><span class="p">)</span>
+    <span class="n">disp</span><span class="p">(</span> <span class="n">w</span><span class="o">.</span><span class="n">Selection</span><span class="o">.</span><span class="n">Information</span><span class="p">(</span><span class="mi">3</span><span class="p">))</span>
+<span class="n">end</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id2">
+<h2>总结：<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li><p>实际上，WdInformation可以给出所有我们想要的信息，只需填入对应的枚举值即可。包括页码、行数、列数、光标等等。</p></li>
+<li><p><a class="reference external" href="https://docs.microsoft.com/zh-cn/office/vba/api/word.wdinformation">https://docs.microsoft.com/zh-cn/office/vba/api/word.wdinformation</a></p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h2>4. 本技术讲解视频<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
+    <iframe src="https:///player.bilibili.com/player.html?aid=244037321&bvid=BV19v411q7RF&cid=220333810&page=1&high_quality=1&danmaku=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
+</div></div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Readthedocs维护/index.html" class="btn btn-neutral float-right" title="3. Readthedocs构建与维护技巧" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="Words_replace_in_MS_Word.html" class="btn btn-neutral float-left" title="2.1 利用matlab实现word中文字自动替换" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, MTC Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
