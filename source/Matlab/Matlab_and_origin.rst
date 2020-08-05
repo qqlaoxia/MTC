@@ -1,0 +1,54 @@
+2.3 Matlab调用Origin作图
+========================================
+
+1. 直接保存为图片
+2. Origin语法参考 https://www.originlab.com/doc/X-Function/ref/
+
+实例1：导出图片
+~~~~~~~~~~~~~~~
+
+无法导出图片可能的原因： 1.
+保存路径文件夹不存在（该程序不会在没有文件夹的情况下构建文件夹） 2.
+origin中图片一定要是激活状态（即打开origin的时候，图片页面必须前置，否则无法输出）
+
+::
+
+
+   % mdata : 需要填充到Origin Worksheet中的数据
+   % template : Origin模板函数名，不含后缀，需要保存在当前工作目录下，如'CreatePlotInOrigin'
+   % fdir : 输出图片目标文件夹，如'D:\image'
+   % fname : 输出图片文件名，不含后缀，如'abc'
+
+
+   function OriginPlot_xia(mdata, template, fdir, fname)
+   % Obtain Origin COM Server object
+   % This will connect to an existing instance of Origin, or create a new one if none exist
+   originObj=actxserver('Origin.ApplicationSI');
+   % invoke(originObj, 'Execute', 'doc -mc 1;') %设置为可见！
+
+   % Clear "dirty" flag in Origin to suppress prompt for saving current project
+   invoke(originObj, 'IsModified', 'false');
+
+   % Load the custom template project
+   dir = pwd;
+   dir = strcat(dir, '\', template, '.opj');
+   invoke(originObj, 'Load', dir);
+
+   % Send this data over to the Data1 worksheet
+   invoke(originObj, 'PutWorksheet', 'Data1', mdata);
+
+   % Save graph
+   cmd = 'expGraph type:=jpg overwrite := rename tr1.unit := 2 tr1.width := 10000 path:= "';
+   cmd = strcat(cmd, fdir, '" filename:= "', fname, '.emf";');
+   invoke(originObj, 'Execute', cmd);
+   % Release
+   release(originObj);
+   end
+
+2.保存为工程文件opju
+~~~~~~~~~~~~~~~~~~~~
+
+::
+
+   invoke(originObj, 'Execute', 'pe_save fname:="F:\天津科技大学\论文发表\六月份主打论文\B4B投稿\历次返修\版本4\版本4.1\数据分析\版本2\mywork.opj "; ')
+
