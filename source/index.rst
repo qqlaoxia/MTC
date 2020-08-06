@@ -36,6 +36,6 @@ Indices and tables
 
 
 - **You can contact us by:**  
-- **Email:mlxia@tust.edu.cn**  
+- **Email:minw@tust.edu.cn or mlxia@tust.edu.cn**  
 - **Tel：+86-022-60601256**
 - **Tianjin University of Science & Technology, College of Biotechnology**
