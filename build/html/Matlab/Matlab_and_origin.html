@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Matlab调用Origin作图 &mdash; MTC 1.0 documentation</title>
+  <title>2.3 Matlab调用Origin作图 &mdash; MTC 1.0 documentation</title>
   
 
   
@@ -88,9 +88,14 @@
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">2. Matlab编程技术与应用</a><ul class="current">
 <li class="toctree-l2"><a class="reference internal" href="Words_replace_in_MS_Word.html">2.1 利用matlab实现word中文字自动替换</a></li>
 <li class="toctree-l2"><a class="reference internal" href="Word_position.html">2.2 利用matlab快速定位文字位置</a></li>
-<li class="toctree-l2 current"><a class="current reference internal" href="#">Matlab调用Origin作图</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">实例1：导出图片</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#opju">2.保存为工程文件opju</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.3 Matlab调用Origin作图</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1.前期准备</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id2">1.1 学生版申请</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id3">1.2 环境搭建</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2：导出图片案例</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#opju">3.保存为工程文件opju案例</a></li>
 </ul>
 </li>
 </ul>
@@ -144,7 +149,7 @@
         
           <li><a href="index.html">2. Matlab编程技术与应用</a> &raquo;</li>
         
-      <li>Matlab调用Origin作图</li>
+      <li>2.3 Matlab调用Origin作图</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -164,16 +169,35 @@
            <div itemprop="articleBody">
             
   <div class="section" id="matlaborigin">
-<h1>Matlab调用Origin作图<a class="headerlink" href="#matlaborigin" title="Permalink to this headline">¶</a></h1>
-<ol class="arabic simple">
-<li><p>直接保存为图片</p></li>
-<li><p>Origin语法参考 <a class="reference external" href="https://www.originlab.com/doc/X-Function/ref/">https://www.originlab.com/doc/X-Function/ref/</a></p></li>
-</ol>
+<h1>2.3 Matlab调用Origin作图<a class="headerlink" href="#matlaborigin" title="Permalink to this headline">¶</a></h1>
 <div class="section" id="id1">
-<h2>实例1：导出图片<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
-<p>无法导出图片可能的原因： 1.
-保存路径文件夹不存在（该程序不会在没有文件夹的情况下构建文件夹） 2.
-origin中图片一定要是激活状态（即打开origin的时候，图片页面必须前置，否则无法输出）</p>
+<h2>1.前期准备<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id2">
+<h3>1.1 学生版申请<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h3>
+<p>目前Originlab对于盗版打击力度很大，会根据已经发表但没有正版许可的论文进行维权。因此特别建议在校学生注册学生版本。与专业版相比，在校注册版已经完全满足日常科研需求。
+申请方法：<a class="reference external" href="https://my.originlab.com/forum/topic.asp?TOPIC_ID=22328">https://my.originlab.com/forum/topic.asp?TOPIC_ID=22328</a></p>
+</div>
+<div class="section" id="id3">
+<h3>1.2 环境搭建<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<p>matlab是通过origin的com接口实现的。（同样道理，其他语言利用接口也可以实现各种功能）。origin的com接口介绍见：<a class="reference external" href="https://www.originlab.com/doc/COM">https://www.originlab.com/doc/COM</a></p>
+<p>Matlab调用Origin的示例程序位于:..Samples`:raw-latex:COM <cite>Server
+and Client:raw-latex:</cite>MATLAB路径下`（以Origin
+2015为例，其他版本的位置可能有所不同）。一共有两个m文件，CreatePlotInOrigin.m及MATLABCallOrigin.m，前者用于实现调用Origin绘图，并将结果保存到剪贴板中，后者演示了如何创建工作表(Worksheet)，如何插入新列等操作。另外一个CreatePlotInOrigin.opj文件是供CreatePlotInOrigin.m调用的一个Origin模板文件
+。根据这两个案例，加上origin官方api，就可以开发出各式各样的脚本了。</p>
+<p><strong>参考网址:</strong></p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://gaomf.cn/2016/01/28/Matlab%E8%B0%83%E7%94%A8Origin%E4%BD%9C%E5%9B%BE/">https://gaomf.cn/2016/01/28/Matlab%E8%B0%83%E7%94%A8Origin%E4%BD%9C%E5%9B%BE/</a></p></li>
+<li><p>Origin语法官网： <a class="reference external" href="https://www.originlab.com/doc/X-Function/ref/">https://www.originlab.com/doc/X-Function/ref/</a></p></li>
+</ul>
+</div>
+</div>
+<div class="section" id="id4">
+<h2>2：导出图片案例<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<p>无法导出图片可能的原因：</p>
+<ul class="simple">
+<li><p>1.保存路径文件夹不存在（该程序不会在没有文件夹的情况下构建文件夹）</p></li>
+<li><p>2.origin中图片一定要是激活状态（即打开origin的时候，图片页面必须前置，否则无法输出）</p></li>
+</ul>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span>% mdata : 需要填充到Origin Worksheet中的数据
 % template : Origin模板函数名，不含后缀，需要保存在当前工作目录下，如&#39;CreatePlotInOrigin&#39;
 % fdir : 输出图片目标文件夹，如&#39;D:\image&#39;
@@ -208,7 +232,7 @@ end
 </div>
 </div>
 <div class="section" id="opju">
-<h2>2.保存为工程文件opju<a class="headerlink" href="#opju" title="Permalink to this headline">¶</a></h2>
+<h2>3.保存为工程文件opju案例<a class="headerlink" href="#opju" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">invoke</span><span class="p">(</span><span class="n">originObj</span><span class="p">,</span> <span class="s1">&#39;Execute&#39;</span><span class="p">,</span> <span class="s1">&#39;pe_save fname:=&quot;F:\天津科技大学\论文发表\六月份主打论文\B4B投稿\历次返修\版本4\版本4.1\数据分析\版本2\mywork.opj &quot;; &#39;</span><span class="p">)</span>
 </pre></div>
 </div>
