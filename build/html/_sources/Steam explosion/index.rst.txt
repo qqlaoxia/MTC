@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-1.汽爆工艺专栏（主编：杨帆）
+6.汽爆工艺专栏（主编：杨帆）
 ===============================
 
 .. toctree::
