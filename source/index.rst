@@ -14,6 +14,7 @@ MTC隶属天津科技大学生物学院微生物制药团队，该团队PI为王
 .. toctree::
    :maxdepth: 2
    :caption: Contents
+   :numbered:
    
    Gene/index
    Matlab/index
@@ -21,6 +22,7 @@ MTC隶属天津科技大学生物学院微生物制药团队，该团队PI为王
    Writing/index
    Daily work/index
    Steam explosion/index
+   Vinegar/index
 
 
 

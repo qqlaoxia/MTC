@@ -3,11 +3,12 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-1.基因操作与合成生物学
+基因操作与合成生物学
 ===============================
 
 .. toctree::
    :maxdepth: 2
+
 
    
    Primer_blast

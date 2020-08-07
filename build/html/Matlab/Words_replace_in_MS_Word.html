@@ -7,7 +7,7 @@
   
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>2.1 利用matlab实现word中文字自动替换 &mdash; MTC 1.0 documentation</title>
+  <title>2.1. 利用matlab实现word中文字自动替换 &mdash; MTC 1.0 documentation</title>
   
 
   
@@ -36,7 +36,7 @@
     
     <link rel="index" title="Index" href="../genindex.html" />
     <link rel="search" title="Search" href="../search.html" />
-    <link rel="next" title="2.2 利用matlab快速定位文字位置" href="Word_position.html" />
+    <link rel="next" title="2.2. 利用matlab快速定位文字位置" href="Word_position.html" />
     <link rel="prev" title="2. Matlab编程技术与应用" href="index.html" /> 
 </head>
 
@@ -84,26 +84,27 @@
             
               <p class="caption"><span class="caption-text">Contents</span></p>
 <ul class="current">
-<li class="toctree-l1"><a class="reference internal" href="../Gene/index.html">1.基因操作与合成生物学</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Gene/index.html">1. 基因操作与合成生物学</a></li>
 <li class="toctree-l1 current"><a class="reference internal" href="index.html">2. Matlab编程技术与应用</a><ul class="current">
-<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1 利用matlab实现word中文字自动替换</a><ul>
-<li class="toctree-l3"><a class="reference internal" href="#id1">1. 附录编号自动提取</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id2">2. 含多附录编号的快速提取</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id3">3.添加括号</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id4">4.利用冒泡法合并求解元素集合</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#word">4.word中内容替换（核心）</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id5">5.编号自动排列</a></li>
-<li class="toctree-l3"><a class="reference internal" href="#id6">6. 本技术介绍视频</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">2.1. 利用matlab实现word中文字自动替换</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id1">2.1.1. 1. 附录编号自动提取</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id2">2.1.2. 2. 含多附录编号的快速提取</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id3">2.1.3. 3.添加括号</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id4">2.1.4. 4.利用冒泡法合并求解元素集合</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#word">2.1.5. 4.word中内容替换（核心）</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id5">2.1.6. 5.编号自动排列</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id6">2.1.7. 6. 本技术介绍视频</a></li>
 </ul>
 </li>
-<li class="toctree-l2"><a class="reference internal" href="Word_position.html">2.2 利用matlab快速定位文字位置</a></li>
-<li class="toctree-l2"><a class="reference internal" href="Matlab_and_origin.html">2.3 Matlab调用Origin作图</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Word_position.html">2.2. 利用matlab快速定位文字位置</a></li>
+<li class="toctree-l2"><a class="reference internal" href="Matlab_and_origin.html">2.3. Matlab调用Origin作图</a></li>
 </ul>
 </li>
 <li class="toctree-l1"><a class="reference internal" href="../Readthedocs维护/index.html">3. Readthedocs构建与维护技巧</a></li>
 <li class="toctree-l1"><a class="reference internal" href="../Writing/index.html">4. 写作技巧</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Daily work/index.html">5.课题组培训</a></li>
-<li class="toctree-l1"><a class="reference internal" href="../Steam explosion/index.html">6.汽爆工艺专栏（主编：杨帆）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Daily work/index.html">5. 课题组培训</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Steam explosion/index.html">6. 汽爆工艺专栏（主编：杨帆）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Vinegar/index.html">7. 7.食醋酿造专栏（主编：杨帆）</a></li>
 </ul>
 
             
@@ -150,9 +151,9 @@
     
       <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
         
-          <li><a href="index.html">2. Matlab编程技术与应用</a> &raquo;</li>
+          <li><a href="index.html"><span class="section-number">2. </span>Matlab编程技术与应用</a> &raquo;</li>
         
-      <li>2.1 利用matlab实现word中文字自动替换</li>
+      <li><span class="section-number">2.1. </span>利用matlab实现word中文字自动替换</li>
     
     
       <li class="wy-breadcrumbs-aside">
@@ -172,12 +173,12 @@
            <div itemprop="articleBody">
             
   <div class="section" id="matlabword">
-<h1>2.1 利用matlab实现word中文字自动替换<a class="headerlink" href="#matlabword" title="Permalink to this headline">¶</a></h1>
+<h1><span class="section-number">2.1. </span>利用matlab实现word中文字自动替换<a class="headerlink" href="#matlabword" title="Permalink to this headline">¶</a></h1>
 <blockquote>
 <div><p>本程序记录了2020年学院工程认证中，附件材料替换的小程序。由于比较简单，不做详细解释，仅留作记录，供未来工作中参考。</p>
 </div></blockquote>
 <div class="section" id="id1">
-<h2>1. 附录编号自动提取<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1.1. </span>1. 附录编号自动提取<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">附录编号提取2</span>
 <span class="n">data2</span><span class="o">=</span><span class="p">{};</span>
 <span class="n">Num</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
@@ -196,7 +197,7 @@
 </div>
 </div>
 <div class="section" id="id2">
-<h2>2. 含多附录编号的快速提取<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1.2. </span>2. 含多附录编号的快速提取<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">data2</span><span class="o">=</span><span class="p">{};</span>
 <span class="n">Num</span><span class="o">=</span><span class="mi">0</span><span class="p">;</span>
 <span class="k">for</span> <span class="n">i</span> <span class="o">=</span><span class="mi">1</span><span class="p">:</span><span class="n">length</span><span class="p">(</span><span class="n">data</span><span class="p">)</span>
@@ -215,7 +216,7 @@
 </div>
 </div>
 <div class="section" id="id3">
-<h2>3.添加括号<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1.3. </span>3.添加括号<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">加括号</span>
 <span class="n">data</span><span class="o">=</span><span class="n">cellfun</span><span class="p">(</span><span class="nd">@black_add</span><span class="p">,</span><span class="n">data</span><span class="p">)</span>
 
@@ -233,7 +234,7 @@
 </div>
 </div>
 <div class="section" id="id4">
-<h2>4.利用冒泡法合并求解元素集合<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1.4. </span>4.利用冒泡法合并求解元素集合<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span><span class="n">元素去重</span><span class="o">--</span><span class="n">方法3</span>
 <span class="o">%</span><span class="n">将data转化为字符串数组</span><span class="o">--</span><span class="n">非常关键</span>
 <span class="n">data</span><span class="o">=</span><span class="n">cellfun</span><span class="p">(</span><span class="nd">@string</span><span class="p">,</span><span class="n">data</span><span class="p">,</span><span class="s1">&#39;UniformOutput&#39;</span><span class="p">,</span><span class="n">false</span><span class="p">);</span>
@@ -270,7 +271,7 @@
 </div>
 </div>
 <div class="section" id="word">
-<h2>4.word中内容替换（核心）<a class="headerlink" href="#word" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1.5. </span>4.word中内容替换（核心）<a class="headerlink" href="#word" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">tic</span>
 <span class="n">w</span><span class="o">=</span><span class="n">actxserver</span><span class="p">(</span><span class="s1">&#39;Word.Application&#39;</span><span class="p">);</span>
 <span class="n">w</span><span class="o">.</span><span class="n">Visible</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
@@ -294,7 +295,7 @@
 </div>
 </div>
 <div class="section" id="id5">
-<h2>5.编号自动排列<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1.6. </span>5.编号自动排列<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h2>
 <div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">确保第一项是从1开始的</span>
 <span class="n">cont1</span><span class="o">=</span><span class="n">data</span><span class="p">{</span><span class="mi">1</span><span class="p">};</span>
 <span class="n">po1</span><span class="o">=</span><span class="n">strfind</span><span class="p">(</span><span class="n">cont1</span><span class="p">,</span><span class="s1">&#39;-&#39;</span><span class="p">);</span>
@@ -320,7 +321,7 @@
 </div>
 </div>
 <div class="section" id="id6">
-<h2>6. 本技术介绍视频<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
+<h2><span class="section-number">2.1.7. </span>6. 本技术介绍视频<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h2>
 <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; height: auto;">
     <iframe src="https://player.bilibili.com/player.html?aid=329031250&bvid=BV1MA411Y7EB&cid=217805774&page=1&high_quality=1&danmaku=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
 </div></div>
@@ -334,7 +335,7 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="Word_position.html" class="btn btn-neutral float-right" title="2.2 利用matlab快速定位文字位置" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="Word_position.html" class="btn btn-neutral float-right" title="2.2. 利用matlab快速定位文字位置" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
         <a href="index.html" class="btn btn-neutral float-left" title="2. Matlab编程技术与应用" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>

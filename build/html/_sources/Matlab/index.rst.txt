@@ -3,7 +3,7 @@
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 
-2. Matlab编程技术与应用
+Matlab编程技术与应用
 ====================================
 .. toctree::
    :maxdepth: 2
