@@ -1,7 +1,7 @@
 插入视频
 --------------------
 
-1.1插入youtube视频(也非常好，只需要替换src部分–需要添加http:)
+插入youtube视频(也非常好，只需要替换src部分–需要添加http:)
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 ::
@@ -12,7 +12,7 @@
            <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
        </div>
 
-1.2 插入bilibili视频
+插入bilibili视频
 ~~~~~~~~~~~~~~~~~~~~
 
 只需要在分享的iframe前面加上http:或者https:即可。
@@ -29,7 +29,7 @@
 
 Bilibili中src中可以加入&high_quality=1&danmaku=0，将视频清晰度设置为最高，并且关闭弹幕。
 
-1.3 为保障手机客户端观看效果
+为保障手机客户端观看效果
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 网址给出的移动端代码：
@@ -42,12 +42,12 @@ Bilibili中src中可以加入&high_quality=1&danmaku=0，将视频清晰度设�
 
 参考网址： - https://www.cnblogs.com/wkfvawl/p/12268980.html
 
-1.4 利用sphinxembeddedvideos添加youtube视频（实践证明：无法使用）
+利用sphinxembeddedvideos添加youtube视频（实践证明：无法使用）
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
 官方网址： https://github.com/Peque/sphinxembeddedvideos
 
-1.5 建议使用的模板
+建议使用的模板
 ~~~~~~~~~~~~~~~~~~
 
 ::

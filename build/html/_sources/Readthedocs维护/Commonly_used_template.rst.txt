@@ -1,7 +1,7 @@
 Readthedocs常用模板
 ============================================
 
-1.1 字体设置
+字体设置
 ------------
 
 -  单星号： *text* 强调 (斜体),
@@ -10,17 +10,17 @@ Readthedocs常用模板
 
 **说明**\ ：强调的字体必须与前后字有一个空格
 
-1.2 细节设置
+细节设置
 ------------
 
-1.2.1 外部链接：
+外部链接：
 ~~~~~~~~~~~~~~~~
 
 ::
 
    .. _a link: http://example.com/
 
-1.2.2 插入图片
+插入图片
 ~~~~~~~~~~~~~~
 
 -  插入Image
@@ -45,7 +45,7 @@ Readthedocs常用模板
       :scale: 50 %
       :alt: map to buried treasure
 
-1.2.3 插入代码
+插入代码
 ~~~~~~~~~~~~~~
 
 ::
@@ -56,7 +56,7 @@ Readthedocs常用模板
          "just a test"
          print 8/2
 
-1.2.4 插入数学公式
+插入数学公式
 ~~~~~~~~~~~~~~~~~~
 
 ::
@@ -65,7 +65,7 @@ Readthedocs常用模板
 
      α_t(i) = P(O_1, O_2, … O_t, q_t = S_i λ)
 
-1.2.5 插入引文
+插入引文
 ~~~~~~~~~~~~~~
 
 ::
@@ -74,7 +74,7 @@ Readthedocs常用模板
 
    .. [Ref] Book or article reference, URL or whatever.
 
-1.2.6 插入视频
+插入视频
 ~~~~~~~~~~~~~~
 
 **常用模板**
@@ -87,7 +87,7 @@ Readthedocs常用模板
            <iframe src="https://player.bilibili.com/player.html?aid=329031250&bvid=BV1MA411Y7EB&cid=217805774&page=1&high_quality=1&danmaku=0" frameborder="0" allowfullscreen style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"></iframe>
        </div>
 
-1.3 文章结构和目录
+文章结构和目录
 ------------------
 
 文章结构和目录由toctree实现。常见参数设定如下：
@@ -173,11 +173,11 @@ Readthedocs常用模板
       doc_2
 	  
 
-1.4 兼容Jupyter Notebook
+兼容Jupyter Notebook
 --------------------------
 可以参考官网：https://nbsphinx.readthedocs.io/en/guzzle-theme/
 
-1.5 列表
+列表
 --------------------------
 以下为1级标题和2级标题
 
@@ -196,7 +196,7 @@ Readthedocs常用模板
 
    + 符号列表4
 
-1.6 枚举
+枚举
 --------------------------
 以下分别用1,2.. (I),(II)...和A),B)...自动编号
 

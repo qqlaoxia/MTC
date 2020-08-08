@@ -10,7 +10,6 @@ Readthedocs构建与维护技巧
 .. toctree::
    :maxdepth: 2
    :caption: Contents
-   :numbered:
    
    FAQ.rst
    Video_add.rst

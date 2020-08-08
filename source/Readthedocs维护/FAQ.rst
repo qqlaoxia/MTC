@@ -1,13 +1,13 @@
 导入readthedocs常见问题
 ================================
 
-1.1 官方网站
+官方网站
 ------------
 
 -  https://www.sphinx-doc.org/en/master/usage/configuration.html?highlight=master_doc
 -  https://docs.readthedocs.io/en/stable/config-file/v2.html#sphinx
 
-1.2 主文件夹中需要添加一个readthedocs.yml文件
+主文件夹中需要添加一个readthedocs.yml文件
 ---------------------------------------------
 
 可以如下添加：
@@ -22,7 +22,7 @@
 
 参考网址：https://docs.readthedocs.io/en/stable/config-file/v2.html
 
-1.3 在配置过程中，出现WARNING: html_static_path 警告而导致失败
+在配置过程中，出现WARNING: html_static_path 警告而导致失败
 --------------------------------------------------------------
 
 解决方案：将con.py文件中的
@@ -39,7 +39,7 @@
 
 参考网址：https://github.com/readthedocs/readthedocs.org/issues/1776
 
-1.4配制文件模板
+配制文件模板
 ---------------
 
 本网站文件内容：
