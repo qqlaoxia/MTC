@@ -24,9 +24,6 @@ MTC隶属天津科技大学生物学院微生物制药团队，该团队PI为王
    Vinegar/index 
    Readthedocs维护/index
 
-.. raw:: html
-	
-	<li class="toctree-l1"><a class="reference internal" href="My/tt.html">1. 视频播放</a></li>
 
 
 
