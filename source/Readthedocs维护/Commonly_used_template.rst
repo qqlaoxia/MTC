@@ -218,3 +218,12 @@ Readthedocs常用模板
 --------------------------
 
 **需要注意的是：一般只有最高级的toctree中设定numered选项，其他的index和正文均不需要设置为numered或者添加序列号。论文中会自动编号。** 
+
+链接到当地文件
+--------------------------
+
+::
+
+   .. raw:: html
+   
+   <li class="toctree-l1"><a class="reference internal" href="For Read/菌群.html">6. 菌群</a></li>
