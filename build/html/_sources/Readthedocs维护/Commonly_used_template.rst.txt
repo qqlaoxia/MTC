@@ -227,3 +227,15 @@ Readthedocs常用模板
    .. raw:: html
    
       <li class="toctree-l1"><a class="reference internal" href="For Read/菌群.html">6. 菌群</a></li>
+
+链接到阿里云服务器
+--------------------------
+
+::
+
+   .. raw:: html
+
+   
+      <video width="100%" height="100%" controls>
+      <source src="https://mtc123.oss-cn-beijing.aliyuncs.com/biopharmacy/tt.mp4" type="video/mp4" />
+      </video>
