@@ -239,3 +239,14 @@ Readthedocs常用模板
       <video width="100%" height="100%" controls>
       <source src="https://mtc123.oss-cn-beijing.aliyuncs.com/biopharmacy/tt.mp4" type="video/mp4" />
       </video>
+	  
+
+段落两端对齐
+--------------------------
+
+::
+
+   .. raw:: html
+
+   
+       <p style="text-align:justify; text-justify:inter-ideograph;">文字，需要对齐的文字段落。</p>
