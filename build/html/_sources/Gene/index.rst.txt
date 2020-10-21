@@ -13,3 +13,4 @@
    
    Primer_blast
    16s_sequence_assembly.rst
+   Dna Features Viewer
