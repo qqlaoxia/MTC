@@ -239,7 +239,7 @@ multipage_plot
 .. image:: demo/multipage_1.png
    :align: center
 
-.. image:: demo/multipage_2.png
+.. image:: demo/multipage_plot_2.png
    :align: center
 
 

@@ -1,0 +1,509 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.1. 分子酶切及拼接分析 &mdash; MTC 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. 基因操作与合成生物学" href="../Gene/index.html" />
+    <link rel="prev" title="1. MTC工具包开发" href="index.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> MTC
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">1. MTC工具包开发</a><ul class="current">
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.1. 分子酶切及拼接分析</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#id2">1.1.1. 酶切分析</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id3">1.1.1.1. 读入数据</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id4">1.1.1.2. 对片段进行酶切</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id5">1.1.1.3. 对反链进行分析</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id6">1.1.1.4. 对生成的片段进行组装</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id7">1.1.1.5. 对生成的片段进行分析</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id8">1.1.1.6. 以下为相同分析（略过）</a></li>
+</ul>
+</li>
+<li class="toctree-l3"><a class="reference internal" href="#id9">1.1.2. 对粘性末端进行拼接</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#id10">1.1.2.1. 首先对末端进行提取</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id11">1.1.2.2. 建立末端数据库</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id14">1.1.2.3. 将片段末端进行数字化处理</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#id16">1.1.2.4. 进行分子对接实验</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Gene/index.html">2. 基因操作与合成生物学</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Matlab/index.html">3. Matlab编程技术与应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Java/index.html">4. Java编程技术与应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Writing/index.html">5. 写作技巧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Daily work/index.html">6. 课题组培训</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Steam explosion/index.html">7. 汽爆工艺专栏（主编：杨帆）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Vinegar/index.html">8. 食醋酿造专栏（主编：杨帆）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Readthedocs维护/index.html">9. Readthedocs构建与维护技巧</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MTC</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html"><span class="section-number">1. </span>MTC工具包开发</a> &raquo;</li>
+        
+      <li><span class="section-number">1.1. </span>分子酶切及拼接分析</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/API/1. Enzymatic hydrolysis and assembly.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="id1">
+<h1><span class="section-number">1.1. </span>分子酶切及拼接分析<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h1>
+<p>本程序所有代码及案例文件</p>
+<ul class="simple">
+<li><p>链接：<a class="reference external" href="https://pan.baidu.com/s/1ESx8BKCNvMAooIDLDH9mXw">https://pan.baidu.com/s/1ESx8BKCNvMAooIDLDH9mXw</a></p></li>
+<li><p>提取码：zfbd</p></li>
+</ul>
+<div class="section" id="id2">
+<h2><span class="section-number">1.1.1. </span>酶切分析<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id3">
+<h3><span class="section-number">1.1.1.1. </span>读入数据<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">读入PCR正链序列</span>
+
+<span class="n">PCR</span><span class="o">=</span><span class="s1">&#39;ACCACCATGGATGAAAATTAGACCACTTGGTGACAGAGTTGTTATTAAAAGATTAGAGGCAGAGGAGACTACTAAGAGCGGTATAGTATTACCTAGCTCAGCTAAAGAGAAACCTCAAATGGCAGAAGTTGTTGCAGTAGGTCCTGGTGGAGTTGTAGATGGCAAAGAAATTCAAATGCAAGTAAAGACAGGAGATAAAGTATTTTTCTCCAAATACAGTGGAACAGAAATAAAAGTTGACAATGAAGAATTGTTAATTTTAAGACAGGACGATATTTTAGGAATTGTAGAAGAATAAGCTATCAATTTTGTTAATAATTCAGGGAGGGATTCTAAATGGCAAAGCAAATATTATACGGAGAAGAAGCAAGAAGATCTATGCAAAAGGGCGTAGACAAACTTGCTGATACTGTTAAGGTTACTCTTGGACCAAAAGGAAGAAATGTTGTTTTAGATAAAAAATTTGGAGCACCACTTATAACAAATGATGGTGTAAGTATAGCAAAAGAAATAGAACTTGAAGATCCATATGAAAATATGGGTGCACAACTTGTTAAGGAAGTTGCAACTAAGACTAATGATGTAGCAGGAGACGGAACTACTACAGCAACACTTCTTGCACAAGCAATAATAAGAGAAGGACTTAAAAATGTTACAGCTGGAGCTAATCCAATGCTTATAAGAAATGGAATAAGATTAGCTGTAGATAAGACTGTTGAAGGACTTAAGAAAGTATCAAAGAATGTTAACGGAAAAGAAGATATAGCAAGAGTTGCATCAATTTCAGCAGCAGATCCTGAAATAGGAAAATTAATAGCTGATGCTATGGAGAAAGTAGGCAACGAAGGAGTTATAACTGTTGAAGAATCAAAATCAATGGGAACAGAACTTGATGTTGTTGAAGGTATGCAATTTGATAGAGGATATTTAAGCCCATACATGGTAACAGATCAAGAGAAAATGGAAGCTGTACTTGATGATCCATATATATTAATAACAGACAAGAAAATTGCAAATATACAAGAAATTCTTCCACTTCTTGAGCAGATAGTTCAACAGGGTAAAAAATTACTTATAATTGCTGATGATGTTGAAGGCGAAGCTTTAGCTACATTGGTTGTTAACAAATTAAGAGGAACATTTAACTGTGTTGCTGTTAAAGCTCCTGGATTTGGCGATAGAAGAAAAGATATGTTAAGAGACATAGCAATCCTTACAGGTGGAGAAGTTATATCAGAAGAGCTTGGAAAAGATCTTAAAGATGTAAAGGTTGAGGATCTTGGAAGTGCTGAAAGCGTTAAAATATCAAAAGAAAATACTACAATAGTAAATGGAAGAGGCGACAAGAGCGCAATCCATGACAGAGTTGCGCAAATAAGAGGTCAAATAGAAGAAACTACATCTGACTTTGATAGAGAAAAATTACAAGAAAGATTAGCAAAACTTGCTGGTGGAGTTGCAGTTGTTAAAGTTGGAGCTGCTTCAGAAACTGAATTAAAAGAGAGAAAAATGAGAATTGAAGATGCTCTTGCAGCTACAAAAGCAGCAGTTGAAGAAGGTATAATTGCTGGTGGTGGTACTGCTTACATCAATGTATTACCAGAAGTAAGAGAATTGACTTCAGACGAACCAGATGTTCAAGTTGGTATAAATATAATAGTTAAGGCTCTTGAAGAACCAGTAAGACAAATAGCTGCAAATGCAGGTCTTGAGGGATCAGTAATAATAGAAAAAATTATAAACAGTGAAAAAGGAATTGGATTTGATGCATTACATGAGAAATATGTTGATATGCTAAGTGTTGGAATTGTTGATCCAACTAAGGTTACAAGATCAGCACTTCAAAATGCGGCATCAGTTGCTTCAACATTCCTTACAACTGAGTGCGCTGTAGCAGATATTCCTGAAAAAGATAAACCTGAAATGCCAGGTGGAGCACCAGGAATGGGAATGGGCGGAATGTACTAAGGATCCTGGT&#39;</span>
+
+<span class="n">PCR</span> <span class="o">=</span>
+<span class="s1">&#39;ACCACCATGGATGAAAATTAGACCACTTGGTGACAGAGTTGTTATTAAAAGATTAGAGGCAGAGGAGACTACTAAGAGCGGTATAGTATTACCTAGCTCAGCTAAAGAGAAACCTCAAATGGCAGAAGTTGTTGCAGTAGGTCCTGGTGGAGTTGTAGATGGCAAAGAAATTCAAATGCAAGTAAAGACAGGAGATAAAGTATTTTTCTCCAAATACAGTGGAACAGAAATAAAAGTTGACAATGAAGAATTGTTAATTTTAAGACAGGACGATATTTTAGGAATTGTAGAAGAATAAGCTATCAATTTTGTTAATAATTCAGGGAGGGATTCTAAATGGCAAAGCAAATATTATACGGAGAAGAAGCAAGAAGATCTATGCAAAAGGGCGTAGACAAACTTGCTGATACTGTTAAGGTTACTCTTGGACCAAAAGGAAGAAATGTTGTTTTAGATAAAAAATTTGGAGCACCACTTATAACAAATGATGGTGTAAGTATAGCAAAAGAAATAGAACTTGAAGATCCATATGAAAATATGGGTGCACAACTTGTTAAGGAAGTTGCAACTAAGACTAATGATGTAGCAGGAGACGGAACTACTACAGCAACACTTCTTGCACAAGCAATAATAAGAGAAGGACTTAAAAATGTTACAGCTGGAGCTAATCCAATGCTTATAAGAAATGGAATAAGATTAGCTGTAGATAAGACTGTTGAAGGACTTAAGAAAGTATCAAAGAATGTTAACGGAAAAGAAGATATAGCAAGAGTTGCATCAATTTCAGCAGCAGATCCTGAAATAGGAAAATTAATAGCTGATGCTATGGAGAAAGTAGGCAACGAAGGAGTTATAACTGTTGAAGAATCAAAATCAATGGGAACAGAACTTGATGTTGTTGAAGGTATGCAATTTGATAGAGGATATTTAAGCCCATACATGGTAACAGATCAAGAGAAAATGGAAGCTGTACTTGATGATCCATATATATTAATAACAGACAAGAAAATTGCAAATATACAAGAAATTCTTCCACTTCTTGAGCAGATAGTTCAACAGGGTAAAAAATTACTTATAATTGCTGATGATGTTGAAGGCGAAGCTTTAGCTACATTGGTTGTTAACAAATTAAGAGGAACATTTAACTGTGTTGCTGTTAAAGCTCCTGGATTTGGCGATAGAAGAAAAGATATGTTAAGAGACATAGCAATCCTTACAGGTGGAGAAGTTATATCAGAAGAGCTTGGAAAAGATCTTAAAGATGTAAAGGTTGAGGATCTTGGAAGTGCTGAAAGCGTTAAAATATCAAAAGAAAATACTACAATAGTAAATGGAAGAGGCGACAAGAGCGCAATCCATGACAGAGTTGCGCAAATAAGAGGTCAAATAGAAGAAACTACATCTGACTTTGATAGAGAAAAATTACAAGAAAGATTAGCAAAACTTGCTGGTGGAGTTGCAGTTGTTAAAGTTGGAGCTGCTTCAGAAACTGAATTAAAAGAGAGAAAAATGAGAATTGAAGATGCTCTTGCAGCTACAAAAGCAGCAGTTGAAGAAGGTATAATTGCTGGTGGTGGTACTGCTTACATCAATGTATTACCAGAAGTAAGAGAATTGACTTCAGACGAACCAGATGTTCAAGTTGGTATAAATATAATAGTTAAGGCTCTTGAAGAACCAGTAAGACAAATAGCTGCAAATGCAGGTCTTGAGGGATCAGTAATAATAGAAAAAATTATAAACAGTGAAAAAGGAATTGGATTTGATGCATTACATGAGAAATATGTTGATATGCTAAGTGTTGGAATTGTTGATCCAACTAAGGTTACAAGATCAGCACTTCAAAATGCGGCATCAGTTGCTTCAACATTCCTTACAACTGAGTGCGCTGTAGCAGATATTCCTGAAAAAGATAAACCTGAAATGCCAGGTGGAGCACCAGGAATGGGAATGGGCGGAATGTACTAAGGATCCTGGT&#39;</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id4">
+<h3><span class="section-number">1.1.1.2. </span>对片段进行酶切<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h3>
+<p>restrict_xia是matlab自带函数restrict的升级版，用法相同，但更加的灵活。可以直接用多个酶对片段进行循环处理，中间不用担心结果存放问题。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>%用BamHI剪切
+
+PCR_zheng=restrict_xia(PCR,&#39;BamHI&#39;)
+
+PCR_zheng = 2×1 cell 数组
+
+&#39;ACCACCATGGATGAAAATTAGACCACT…
+&#39;GATCCTGGT&#39;
+
+% 用NcoI剪切
+
+PCR_zheng=restrict_xia(PCR_zheng,&#39;NcoI&#39;)
+
+PCR_zheng = 3×1 cell 数组
+
+&#39;ACCAC&#39;
+&#39;CATGGATGAAAATTAGACCACTTGGTG…
+&#39;GATCCTGGT&#39;
+%正链分析完毕
+
+%--------------------------------------------
+</pre></div>
+</div>
+</div>
+<div class="section" id="id5">
+<h3><span class="section-number">1.1.1.3. </span>对反链进行分析<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h3>
+<p>具体过程同上，用法同matlab自带的restrict。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>PCR_c=seqcomplement(PCR) % PCR互补链
+
+PCR_c =
+&#39;TGGTGGTACCTACTTTTAATCTGGTGAACCACTGTCTCAACAATAATTTTCTAATCTCCGTCTCCTCTGATGATTCTCGCCATATCATAATGGATCGAGTCGATTTCTCTTTGGAGTTTACCGTCTTCAACAACGTCATCCAGGACCACCTCAACATCTACCGTTTCTTTAAGTTTACGTTCATTTCTGTCCTCTATTTCATAAAAAGAGGTTTATGTCACCTTGTCTTTATTTTCAACTGTTACTTCTTAACAATTAAAATTCTGTCCTGCTATAAAATCCTTAACATCTTCTTATTCGATAGTTAAAACAATTATTAAGTCCCTCCCTAAGATTTACCGTTTCGTTTATAATATGCCTCTTCTTCGTTCTTCTAGATACGTTTTCCCGCATCTGTTTGAACGACTATGACAATTCCAATGAGAACCTGGTTTTCCTTCTTTACAACAAAATCTATTTTTTAAACCTCGTGGTGAATATTGTTTACTACCACATTCATATCGTTTTCTTTATCTTGAACTTCTAGGTATACTTTTATACCCACGTGTTGAACAATTCCTTCAACGTTGATTCTGATTACTACATCGTCCTCTGCCTTGATGATGTCGTTGTGAAGAACGTGTTCGTTATTATTCTCTTCCTGAATTTTTACAATGTCGACCTCGATTAGGTTACGAATATTCTTTACCTTATTCTAATCGACATCTATTCTGACAACTTCCTGAATTCTTTCATAGTTTCTTACAATTGCCTTTTCTTCTATATCGTTCTCAACGTAGTTAAAGTCGTCGTCTAGGACTTTATCCTTTTAATTATCGACTACGATACCTCTTTCATCCGTTGCTTCCTCAATATTGACAACTTCTTAGTTTTAGTTACCCTTGTCTTGAACTACAACAACTTCCATACGTTAAACTATCTCCTATAAATTCGGGTATGTACCATTGTCTAGTTCTCTTTTACCTTCGACATGAACTACTAGGTATATATAATTATTGTCTGTTCTTTTAACGTTTATATGTTCTTTAAGAAGGTGAAGAACTCGTCTATCAAGTTGTCCCATTTTTTAATGAATATTAACGACTACTACAACTTCCGCTTCGAAATCGATGTAACCAACAATTGTTTAATTCTCCTTGTAAATTGACACAACGACAATTTCGAGGACCTAAACCGCTATCTTCTTTTCTATACAATTCTCTGTATCGTTAGGAATGTCCACCTCTTCAATATAGTCTTCTCGAACCTTTTCTAGAATTTCTACATTTCCAACTCCTAGAACCTTCACGACTTTCGCAATTTTATAGTTTTCTTTTATGATGTTATCATTTACCTTCTCCGCTGTTCTCGCGTTAGGTACTGTCTCAACGCGTTTATTCTCCAGTTTATCTTCTTTGATGTAGACTGAAACTATCTCTTTTTAATGTTCTTTCTAATCGTTTTGAACGACCACCTCAACGTCAACAATTTCAACCTCGACGAAGTCTTTGACTTAATTTTCTCTCTTTTTACTCTTAACTTCTACGAGAACGTCGATGTTTTCGTCGTCAACTTCTTCCATATTAACGACCACCACCATGACGAATGTAGTTACATAATGGTCTTCATTCTCTTAACTGAAGTCTGCTTGGTCTACAAGTTCAACCATATTTATATTATCAATTCCGAGAACTTCTTGGTCATTCTGTTTATCGACGTTTACGTCCAGAACTCCCTAGTCATTATTATCTTTTTTAATATTTGTCACTTTTTCCTTAACCTAAACTACGTAATGTACTCTTTATACAACTATACGATTCACAACCTTAACAACTAGGTTGATTCCAATGTTCTAGTCGTGAAGTTTTACGCCGTAGTCAACGAAGTTGTAAGGAATGTTGACTCACGCGACATCGTCTATAAGGACTTTTTCTATTTGGACTTTACGGTCCACCTCGTGGTCCTTACCCTTACCCGCCTTACATGATTCCTAGGACCA&#39;
+
+PCR_fan=restrict_xia(PCR_c,&#39;CCTAGG&#39;,5); % BamHI酶解
+
+PCR_fan=restrict_xia(PCR_fan,&#39;GGTACC&#39;,5) % NcoI酶解
+
+PCR_fan = 3×1 cell 数组
+
+&#39;TGGTGGTAC&#39;
+&#39;CTACTTTTAATCTGGTGAACCACTGTC…
+&#39;GACCA&#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="id6">
+<h3><span class="section-number">1.1.1.4. </span>对生成的片段进行组装<a class="headerlink" href="#id6" title="Permalink to this headline">¶</a></h3>
+<p>由于我们平时看到的均为两条链形式，我们对上面步骤的片段进行组装。整理成几段切割的片段，每段片段为两链形式，上链方向为5→3，下链为3→5</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>%互补链分析完毕
+
+%-------------------------
+
+jieguo1=seqcombine_xia(PCR_zheng,PCR_fan) %进行序列组装
+
+jieguo1 = 2×3 cell 数组
+
+&#39;ACCAC &#39; &#39;CATGGATGAAAATTAGACCACTTGGTG… &#39;GATCCTGGT&#39;
+&#39;TGGTGGTAC&#39; &#39;CTACTTTTAATCTGGTGAACCACTGTC… &#39;GACCA&#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="id7">
+<h3><span class="section-number">1.1.1.5. </span>对生成的片段进行分析<a class="headerlink" href="#id7" title="Permalink to this headline">¶</a></h3>
+<p>seqreport_xia可以直接给出生成的片段、粘性末端情况，并生成问题和图像两种报告形式。由于mlx文件无法运行鼠标交互，seqreport_xia无法直接运行。可在console进行运行，或邮件鼠标运行。</p>
+<p>注明：seqreport_xia程序中，出现图片报告后，需要用鼠标选择文字标注所在的位置（gtext函数）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="o">%</span> <span class="n">seqreport_xia</span><span class="p">(</span><span class="n">jieguo1</span><span class="p">)</span> <span class="o">%</span><span class="n">生成序列报告</span>
+
+<span class="o">%--------------------</span>
+
+<span class="o">%</span><span class="n">以上PCR分析完毕</span>
+
+<span class="o">%---------------------------------------------------------------------------------------</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="id8">
+<h3><span class="section-number">1.1.1.6. </span>以下为相同分析（略过）<a class="headerlink" href="#id8" title="Permalink to this headline">¶</a></h3>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>%读入质粒正链序列
+
+zhili=fastaread(&#39;pET 28a(+).fasta&#39;);
+
+zhili=zhili.Sequence;
+
+% 用BamHI剪切
+
+zhi_zheng=restrict_xia(zhili,&#39;BamHI&#39;)
+
+zhi_zheng = 2×1 cell 数组
+
+&#39;ATCCGGATATAGTTCCTCCTTTCAGCA…
+&#39;GATCCGCGACCCATTTGCTGTCCACCA…
+
+%用NcoI剪切
+
+zhili_zheng=restrict_xia(zhi_zheng,&#39;NcoI&#39;)
+
+zhili_zheng = 3×1 cell 数组
+
+&#39;ATCCGGATATAGTTCCTCCTTTCAGCA…
+&#39;GATCCGCGACCCATTTGCTGTCCACCA…
+&#39;CATGGTATATCTCCTTCTTAAAGTTAA…
+
+%正链分析完毕
+
+%--------------------------------------------
+
+zhili_c=seqcomplement(zhili) % PCR互补链
+
+zhili_c =
+&#39;TAGGCCTATATCAAGGAGGAAAGTCGTTTTTTGGGGAGTTCTGGGCAAATCTCCGGGGTTCCCCAATACGATCAATAACGAGTCGCCACCGTCGTCGGTTGAGTCGAAGGAAAGCCCGAAACAATCGTCGGCCTAGAGTCACCACCACCACCACCACGAGCTCACGCCGGCGTTCGAACAGCTGCCTCGAGCTTAAGCCTAGGCGCTGGGTAAACGACAGGTGGTCAGTACGATCGGTATACCGACGGCGCGCCGTGGTCCGGCGACGACACTACTACTACTACTACCGACGACGGGTACCATATAGAGGAAGAATTTCAATTTGTTTTAATAAAGATCTCCCCTTAACAATAGGCGAGTGTTAAGGGGATATCACTCAGCATAATTAAAGCGCCCTAGCTCTAGAGCTAGGAGATGCGGCCTGCGTAGCACCGGCCGTAGTGGCCGCGGTGTCCACGCCAACGACCGCGGATATAGCGGCTGTAGTGGCTACCCCTTCTAGCCCGAGCGGTGAAGCCCGAGTACTCGCGAACAAAGCCGCACCCATACCACCGTCCGGGGCACCGGCCCCCTGACAACCCGCGGTAGAGGAACGTACGTGGTAAGGAACGCCGCCGCCACGAGTTGCCGGAGTTGGATGATGACCCGACGAAGGATTACGTCCTCAGCGTATTCCCTCTCGCAGCTCTAGGGCCTGTGGTAGCTTACCGCGTTTTGGAAAGCGCCATACCGTACTATCGCGGGCCTTCTCTCAGTTAAGTCCCACCACTTACACTTTGGTCATTGCAATATGCTACAGCGTCTCATACGGCCACAGAGAATAGTCTGGCAAAGGGCGCACCACTTGGTCCGGTCGGTGCAAAGACGCTTTTGCGCCCTTTTTCACCTTCGCCGCTACCGCCTCGACTTAATGTAAGGGTTGGCGCACCGTGTTGTTGACCGCCCGTTTGTCAGCAACGACTAACCGCAACGGTGGAGGTCAGACCGGGACGTGCGCGGCAGCGTTTAACAGCGCCGCTAATTTAGAGCGCGGCTAGTTGACCCACGGTCGCACCACCACAGCTACCATCTTGCTTCGCCGCAGCTTCGGACATTTCGCCGCCACGTGTTAGAAGAGCGCGTTGCGCAGTCACCCGACTAGTAATTGATAGGCGACCTACTGGTCCTACGGTAACGACACCTTCGACGGACGTGATTACAAGGCCGCAATAAAGAACTACAGAGACTGGTCTGTGGGTAGTTGTCATAATAAAAGAGGGTACTTCTGCCATGCGCTGACCCGCACCTCGTAGACCAGCGTAACCCAGTGGTCGTTTAGCGCGACAATCGCCCGGGTAATTCAAGACAGAGCCGCGCAGACGCAGACCGACCGACCGTATTTATAGAGTGAGCGTTAGTTTAAGTCGGCTATCGCCTTGCCCTTCCGCTGACCTCACGGTACAGGCCAAAAGTTGTTTGGTACGTTTACGACTTACTCCCGTAGCAAGGGTGACGCTACGACCAACGGTTGCTAGTCTACCGCGACCCGCGTTACGCGCGGTAATGGCTCAGGCCCGACGCGCAACCACGCCTATAGAGCCATCACCCTATGCTGCTATGGCTTCTGTCGAGTACAATATAGGGCGGCAATTGGTGGTAGTTTGTCCTAAAAGCGGACGACCCCGTTTGGTCGCACCTGGCGAACGACGTTGAGAGAGTCCCGGTCCGCCACTTCCCGTTAGTCGACAACGGGCAGAGTGACCACTTTTCTTTTTGGTGGGACCGCGGGTTATGCGTTTGGCGGAGAGGGGCGCGCAACCGGCTAAGTAATTACGTCGACCGTGCTGTCCAAAGGGCTGACCTTTCGCCCGTCACTCGCGTTGCGTTAATTACATTCAATCGAGTGAGTAATCCGTGGCCCTAGAGCTGGCTACGGGAACTCTCGGAAGTTGGGTCAGTCGAGGAAGGCCACCCGCGCCCCGTACTGATAGCAGCGGCGTGAATACTGACAGAAGAAATAGTACGTTGAGCATCCTGTCCACGGCCGTCGCGAGACCCAGTAAAAGCCGCTCCTGGCGAAAGCGACCTCGCGCTGCTACTAGCCGGACAGCGAACGCCATAAGCCTTAGAACGTGCGGGAGCGAGTTCGGAAGCAGTGACCAGGGCGGTGGTTTGCAAAGCCGCTCTTCGTCCGGTAATAGCGGCCGTACCGCCGGGGTGCCCACGCGTACTAGCACGAGGACAGCAACTCCTGGGCCGATCCGACCGCCCCAACGGAATGACCAATCGTCTTACTTAGTGGCTATGCGCTCGCTTGCACTTCGCTGACGACGACGTTTTGCAGACGCTGGACTCGTTGTTGTACTTACCAGAAGCCAAAGGCACAAAGCATTTCAGACCTTTGCGCCTTCAGTCGCGGGACGTGGTAATACAAGGCCTAGACGTAGCGTCCTACGACGACCGATGGGACACCTTGTGGATGTAGACATAATTGCTTCGCGACCGTAACTGGGACTCACTAAAAAGAGACCAGGGCGGCGTAGGTATGGCGGTCAACAAATGGGAGTGTTGCAAGGTCATTGGCCCGTACAAGTAGTAGTCATTGGGCATAGCACTCGTAGGAGAGAGCAAAGTAGCCATAGTAATGGGGGTACTTGTCTTTAGGGGGAATGTGCCTCCGTAGTCACTGGTTTGTCCTTTTTTGGCGGGAATTGTACCGGGCGAAATAGTCTTCGGTCTGTAATTGCGAAGACCTCTTTGAGTTGCTCGACCTGCGCCTACTTGTCCGTCTGTAGACACTTAGCGAAGTGCTGGTGCGACTACTCGAAATGGCGTCGACGGAGCGCGCAAAGCCACTACTGCCACTTTTGGAGACTGTGTACGTCGAGGGCCTCTGCCAGTGTCGAACAGACATTCGCCTACGGCCCTCGTCTGTTCGGGCAGTCCCGCGCAGTCGCCCACAACCGCCCACAGCCCCGCGTCGGTACTGGGTCAGTGCATCGCTATCGCCTCACATATGACCGAATTGATACGCCGTAGTCTCGTCTAACATGACTCTCACGTGGTATATACGCCACACTTTATGGCGTGTCTACGCATTCCTCTTTTATGGCGTAGTCCGCGAGAAGGCGAAGGAGCGAGTGACTGAGCGACGCGAGCCAGCAAGCCGACGCCGCTCGCCATAGTCGAGTGAGTTTCCGCCATTATGCCAATAGGTGTCTTAGTCCCCTATTGCGTCCTTTCTTGTACACTCGTTTTCCGGTCGTTTTCCGGTCCTTGGCATTTTTCCGGCGCAACGACCGCAAAAAGGTATCCGAGGCGGGGGGACTGCTCGTAGTGTTTTTAGCTGCGAGTTCAGTCTCCACCGCTTTGGGCTGTCCTGATATTTCTATGGTCCGCAAAGGGGGACCTTCGAGGGAGCACGCGAGAGGACAAGGCTGGGACGGCGAATGGCCTATGGACAGGCGGAAAGAGGGAAGCCCTTCGCACCGCGAAAGAGTATCGAGTGCGACATCCATAGAGTCAAGCCACATCCAGCAAGCGAGGTTCGACCCGACACACGTGCTTGGGGGGCAAGTCGGGCTGGCGACGCGGAATAGGCCATTGATAGCAGAACTCAGGTTGGGCCATTCTGTGCTGAATAGCGGTGACCGTCGTCGGTGACCATTGTCCTAATCGTCTCGCTCCATACATCCGCCACGATGTCTCAAGAACTTCACCACCGGATTGATGCCGATGTGATCTTCCTGTCATAAACCATAGACGCGAGACGACTTCGGTCAATGGAAGCCTTTTTCTCAACCATCGAGAACTAGGCCGTTTGTTTGGTGGCGACCATCGCCACCAAAAAAACAAACGTTCGTCGTCTAATGCGCGTCTTTTTTTCCTAGAGTTCTTCTAGGAAACTAGAAAAGATGCCCCAGACTGCGAGTCACCTTGCTTTTGAGTGCAATTCCCTAAAACCAGTACTTGTTATTTTGACAGACGAATGTATTTGTCATTATGTTCCCCACAATACTCGGTATAAGTTGCCCTTTGCAGAACGAGATCCGGCGCTAATTTAAGGTTGTACCTACGACTAAATATACCCATATTTACCCGAGCGCTATTACAGCCCGTTAGTCCACGCTGTTAGATAGCTAACATACCCTTCGGGCTACGCGGTCTCAACAAAGACTTTGTACCGTTTCCATCGCAACGGTTACTACAATGTCTACTCTACCAGTCTGATTTGACCGACTGCCTTAAATACGGAGAAGGCTGGTAGTTCGTAAAATAGGCATGAGGACTACTACGTACCAATGAGTGGTGACGCTAGGGGCCCTTTTGTCGTAAGGTCCATAATCTTCTTATAGGACTAAGTCCACTTTTATAACAACTACGCGACCGTCACAAGGACGCGGCCAACGTAAGCTAAGGACAAACATTAACAGGAAAATTGTCGCTAGCGCATAAAGCAGAGCGAGTCCGCGTTAGTGCTTACTTATTGCCAAACCAACTACGCTCACTAAAACTACTGCTCGCATTACCGACCGGACAACTTGTTCAGACCTTTCTTTACGTATTTGAAAACGGTAAGAGTGGCCTAAGTCAGCAGTGAGTACCACTAAAGAGTGAACTATTGGAATAAAAACTGCTCCCCTTTAATTATCCAACATAACTACAACCTGCTCAGCCTTAGCGTCTGGCTATGGTCCTAGAACGGTAGGATACCTTGACGGAGCCACTCAAAAGAGGAAGTAATGTCTTTGCCGAAAAAGTTTTTATACCATAACTATTAGGACTATACTTATTTAACGTCAAAGTAAACTACGAGCTACTCAAAAAGATTCTTAATTAAGTACTCGCCTATGTATAAACTTACATAAATCTTTTTATTTGTTTATCCCCAAGGCGCGTGTAAAGGGGCTTTTCACGGTGGACTTTAACATTTGCAATTATAAAACAATTTTAAGCGCAATTTAAAAACAATTTAGTCGAGTAAAAAATTGGTTATCCGGCTTTAGCCGTTTTAGGGAATATTTAGTTTTCTTATCTGGCTCTATCCCAACTCACAACAAGGTCAAACCTTGTTCTCAGGTGATAATTTCTTGCACCTGAGGTTGCAGTTTCCCGCTTTTTGGCAGATAGTCCCGCTACCGGGTGATGCACTTGGTAGTGGGATTAGTTCAAAAAACCCCAGCTCCACGGCATTTCGTGATTTAGCCTTGGGATTTCCCTCGGGGGCTAAATCTCGAACTGCCCCTTTCGGCCGCTTGCACCGCTCTTTCCTTCCCTTCTTTCGCTTTCCTCGCCCGCGATCCCGCGACCGTTCACATCGCCAGTGCGACGCGCATTGGTGGTGTGGGCGGCGCGAATTACGCGGCGATGTCCCGCGCAGGGTAAGCGGT&#39;
+
+zhili_fan=restrict_xia(zhili_c,&#39;CCTAGG&#39;,5); % BamHI酶解
+zhili_fan=restrict_xia(zhili_fan,&#39;GGTACC&#39;,5) % NcoI酶解
+zhili_fan = 3×1 cell 数组
+
+&#39;TAGGCCTATATCAAGGAGGAAAGTCGT…
+&#39;GCGCTGGGTAAACGACAGGTGGTCAGT…
+&#39;CATATAGAGGAAGAATTTCAATTTGTT…
+
+%反链分析完毕
+
+%-------------------------
+
+jieguo2=seqcombine_xia(zhili_zheng,zhili_fan) %进行序列组装
+
+jieguo2 = 2×3 cell 数组
+
+&#39;ATCCGGATATAGTTCCTCCTTTCAGCA… &#39;GATCCGCGACCCATTTGCTGTCCACCA…
+&#39;CATGGTATATCTCCTTCTTAAAGTTAA…
+&#39;TAGGCCTATATCAAGGAGGAAAGTCGT… &#39;GCGCTGGGTAAACGACAGGTGGTCAGT…
+&#39;CATATAGAGGAAGAATTTCAATTTGTT…
+
+% seqreport_xia(jieguo2) %生成分析报告
+
+% 以上质粒分析完毕！
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id9">
+<h2><span class="section-number">1.1.2. </span>对粘性末端进行拼接<a class="headerlink" href="#id9" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="id10">
+<h3><span class="section-number">1.1.2.1. </span>首先对末端进行提取<a class="headerlink" href="#id10" title="Permalink to this headline">¶</a></h3>
+<p>说明：</p>
+<p>为了用字母表征粘性末端，我们独创了一种方法：如 ‘LP-CATG-RB-
+CTAG’，其中L和R分别表示左端和右端，P(top)和B(bottom)分别表示末端位于上链还是下链。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ends1=endsget_xia(jieguo1)
+ends1 = 1×3 cell 数组
+
+&#39;RB-GTAC&#39; &#39;LP-CATG-RB-CTAG&#39; &#39;LP-GATC&#39;
+
+ends2=endsget_xia(jieguo2)
+
+ends2 = 1×3 cell 数组
+
+&#39;RB-CTAG&#39; &#39;LP-GATC-RB-GTAC&#39; &#39;LP-CATG&#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="id11">
+<h3><span class="section-number">1.1.2.2. </span>建立末端数据库<a class="headerlink" href="#id11" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id12">
+<h4><span class="section-number">1.1.2.2.1. </span>提取各个片段的末端<a class="headerlink" href="#id12" title="Permalink to this headline">¶</a></h4>
+<p>特别需要注意的是：由于编程中，习惯将上链表示为正链，下链为反方向。所以，如果粘性末端位于反链，则对其进行求补（即标准化）。endextract_xia可以从末段中提取末端，并根据所在位置（上链还是下链，进行标准化）</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ends_extracted=endextract_xia([ends1,ends2]) % endextract_xia已经包含了标准化操作
+
+ends_extracted = 1×8 cell 数组
+
+&#39;CATG&#39; &#39;CATG&#39; &#39;GATC&#39; &#39;GATC&#39; &#39;GATC&#39; &#39;GATC&#39; &#39;CATG&#39; &#39;CATG&#39;
+</pre></div>
+</div>
+</div>
+<div class="section" id="id13">
+<h4><span class="section-number">1.1.2.2.2. </span>对末端进行去重，构建数据库<a class="headerlink" href="#id13" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>ends_num=unique(ends_extracted) %利用unique进行去重
+
+ends_num = 1×2 cell 数组
+
+&#39;CATG&#39; &#39;GATC&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id14">
+<h3><span class="section-number">1.1.2.3. </span>将片段末端进行数字化处理<a class="headerlink" href="#id14" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id15">
+<h4><span class="section-number">1.1.2.3.1. </span>将末端转化为数字<a class="headerlink" href="#id15" title="Permalink to this headline">¶</a></h4>
+<p>1）ends_num为2.2.2中数据库中的粘性末端。其编号及2.2.2中末端在cell中的位置</p>
+<p>2）endnumbered_xia将待分析DNA片段的末端进行编号化处理。其中0表示平头端。12表示该左端为数据库中第一个粘性末端，2该片段右端为数据库的第二个粘性末端</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>[endnumbered1] = endnumbered_xia([ends1,ends2],ends_num)% 正向序列
+
+endnumbered1 = 1×6 cell 数组
+
+&#39;01&#39; &#39;12&#39; &#39;20&#39; &#39;02&#39; &#39;21&#39; &#39;10&#39;
+</pre></div>
+</div>
+<p>3）片段可能有翻转的情况，把该种情况也加入进来。因此，一个片段包含两种状态：正向和反向。其编号对应着endnumbered中所在位置。</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>endnumbered2=cellfun(@fliplr,endnumbered1,&#39;UniformOutput&#39;,false);
+
+endnumbered=[endnumbered1,endnumbered2]
+
+endnumbered = 1×12 cell 数组
+
+&#39;01&#39; &#39;12&#39; &#39;20&#39; &#39;02&#39; &#39;21&#39; &#39;10&#39; &#39;10&#39; &#39;21&#39; &#39;02&#39; &#39;20&#39; &#39;12&#39; &#39;01&#39;
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="id16">
+<h3><span class="section-number">1.1.2.4. </span>进行分子对接实验<a class="headerlink" href="#id16" title="Permalink to this headline">¶</a></h3>
+<div class="section" id="id17">
+<h4><span class="section-number">1.1.2.4.1. </span>制定对接规则<a class="headerlink" href="#id17" title="Permalink to this headline">¶</a></h4>
+<p>可以根据自己实际需要，选择对接的规则，并将其放在paris中</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>% 比如，我们这次实验，根据实际情况可知，只有2和5有可能反复重复，假设可以重复3次
+
+pairs=nchoosek(repmat([2,5,8,11],1,3),3);
+
+% paris可以自由规定
+</pre></div>
+</div>
+</div>
+<div class="section" id="id18">
+<h4><span class="section-number">1.1.2.4.2. </span>计算可能的对接结果<a class="headerlink" href="#id18" title="Permalink to this headline">¶</a></h4>
+<p>根据以上分析，我们构建了一套考察分子连接的方法：</p>
+<p>1）只有相同的末端，才能够连接，如{0,1},{1,2}带有这种末端的两个片段可以链接，因为其有共同的末端2</p>
+<p>2）链接片段中，除首末端外，中间不允许出现0，因为0无法与其他进行链接；</p>
+<p>3）最后对生成的结果进行去重；</p>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span>seqpairs=unique(seqsprlinks_xia(endnumbered,pairs),&#39;rows&#39;)
+
+seqpairs = 16×3
+
+2 5 2
+2 5 11
+2 8 2
+2 8 11
+5 2 5
+5 2 8
+5 11 5
+5 11 8
+8 2 5
+8 2 8
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Gene/index.html" class="btn btn-neutral float-right" title="2. 基因操作与合成生物学" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="index.html" class="btn btn-neutral float-left" title="1. MTC工具包开发" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, MTC Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
