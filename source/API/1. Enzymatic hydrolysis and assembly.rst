@@ -400,7 +400,7 @@ CTAG’，其中L和R分别表示左端和右端，P(top)和B(bottom)分别表�
         var visits = getCookie("counter")
         if(!visits)
         {
-            visits=1000;
+            visits=1;
         }
         else
         {
