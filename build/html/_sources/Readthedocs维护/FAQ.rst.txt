@@ -212,7 +212,7 @@ https://www.sphinx-doc.org/en/master/usage/configuration.html?highlight=master_d
         var visits = getCookie("counter")
         if(!visits)
         {
-            visits=1000;
+            visits=1;
         }
         else
         {

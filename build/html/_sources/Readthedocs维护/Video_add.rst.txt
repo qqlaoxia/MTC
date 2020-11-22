@@ -157,7 +157,7 @@ Bilibili中src中可以加入&high_quality=1&danmaku=0，将视频清晰度设�
         var visits = getCookie("counter")
         if(!visits)
         {
-            visits=1000;
+            visits=1;
         }
         else
         {

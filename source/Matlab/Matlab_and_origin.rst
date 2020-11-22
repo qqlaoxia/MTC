@@ -172,7 +172,7 @@ and Client:raw-latex:`\MATLAB路径下`（以Origin
         var visits = getCookie("counter")
         if(!visits)
         {
-            visits=1000;
+            visits=1;
         }
         else
         {

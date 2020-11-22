@@ -116,7 +116,7 @@ md转rst方法
         var visits = getCookie("counter")
         if(!visits)
         {
-            visits=1000;
+            visits=1;
         }
         else
         {

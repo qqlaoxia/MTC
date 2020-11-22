@@ -214,7 +214,7 @@ A) fast\_download为我们开发的序列文件自动下载程序，见：https:
         var visits = getCookie("counter")
         if(!visits)
         {
-            visits=1000;
+            visits=1;
         }
         else
         {

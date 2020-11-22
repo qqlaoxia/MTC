@@ -350,7 +350,7 @@ Readthedocs常用模板
         var visits = getCookie("counter")
         if(!visits)
         {
-            visits=1000;
+            visits=1;
         }
         else
         {

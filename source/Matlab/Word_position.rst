@@ -277,7 +277,7 @@ https://docs.microsoft.com/zh-cn/office/vba/api/word.wdinformation
         var visits = getCookie("counter")
         if(!visits)
         {
-            visits=1000;
+            visits=1;
         }
         else
         {
