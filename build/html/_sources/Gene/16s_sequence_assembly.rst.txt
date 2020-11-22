@@ -214,16 +214,14 @@ A) fast\_download为我们开发的序列文件自动下载程序，见：https:
         var visits = getCookie("counter")
         if(!visits)
         {
-            visits=1;
+            visits=1000;
         }
         else
         {
             visits=parseInt(visits)+1;
         }
         setCookie("counter", visits, now)
-		if(visits<1010){
-		visits=1001
-		}
+
         document.write("<center><b>您是到访的第" + visits + "位用户！</b></center>")
     </script>
 
