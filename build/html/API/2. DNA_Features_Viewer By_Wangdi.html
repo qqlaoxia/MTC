@@ -1,0 +1,418 @@
+
+
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>1.2. DNA注释自动化绘图（By 王頔） &mdash; MTC 1.0 documentation</title>
+  
+
+  
+  <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+
+  
+  
+  
+  
+
+  
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+    
+      <script type="text/javascript" id="documentation_options" data-url_root="../" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+        <script src="../_static/language_data.js"></script>
+    
+    <script type="text/javascript" src="../_static/js/theme.js"></script>
+
+    
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" />
+    <link rel="next" title="2. 基因操作与合成生物学" href="../Gene/index.html" />
+    <link rel="prev" title="1.1. 分子酶切及拼接分析" href="1. Enzymatic hydrolysis and assembly.html" /> 
+</head>
+
+<body class="wy-body-for-nav">
+
+   
+  <div class="wy-grid-for-nav">
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+          
+
+          
+            <a href="../index.html" class="icon icon-home" alt="Documentation Home"> MTC
+          
+
+          
+          </a>
+
+          
+            
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+              
+            
+            
+              <ul class="current">
+<li class="toctree-l1 current"><a class="reference internal" href="index.html">1. MTC工具包开发</a><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="1. Enzymatic hydrolysis and assembly.html">1.1. 分子酶切及拼接分析</a></li>
+<li class="toctree-l2 current"><a class="current reference internal" href="#">1.2. DNA注释自动化绘图（By 王頔）</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#software-installment">1.2.1. software installment</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#id1">1.2.2. 核心功能及用法</a><ul>
+<li class="toctree-l4"><a class="reference internal" href="#gff-object">1.2.2.1. Gff_object</a></li>
+<li class="toctree-l4"><a class="reference internal" href="#gb-features-plot">1.2.2.2. gb_features_plot</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="../Gene/index.html">2. 基因操作与合成生物学</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Matlab/index.html">3. Matlab编程技术与应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Java/index.html">4. Java编程技术与应用</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Writing/index.html">5. 写作技巧</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Daily work/index.html">6. 课题组培训</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Steam explosion/index.html">7. 汽爆工艺专栏（主编：杨帆）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Vinegar/index.html">8. 食醋酿造专栏（主编：杨帆）</a></li>
+<li class="toctree-l1"><a class="reference internal" href="../Readthedocs维护/index.html">9. Readthedocs构建与维护技巧</a></li>
+</ul>
+
+            
+          
+        </div>
+        
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" aria-label="top navigation">
+        
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">MTC</a>
+        
+      </nav>
+
+
+      <div class="wy-nav-content">
+        
+        <div class="rst-content">
+        
+          
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+
+  <ul class="wy-breadcrumbs">
+    
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+        
+          <li><a href="index.html"><span class="section-number">1. </span>MTC工具包开发</a> &raquo;</li>
+        
+      <li><span class="section-number">1.2. </span>DNA注释自动化绘图（By 王頔）</li>
+    
+    
+      <li class="wy-breadcrumbs-aside">
+        
+            
+            <a href="../_sources/API/2. DNA_Features_Viewer By_Wangdi.rst.txt" rel="nofollow"> View page source</a>
+          
+        
+      </li>
+    
+  </ul>
+
+  
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  <div class="section" id="dna-by">
+<h1><span class="section-number">1.2. </span>DNA注释自动化绘图（By 王頔）<a class="headerlink" href="#dna-by" title="Permalink to this headline">¶</a></h1>
+<div class="section" id="software-installment">
+<h2><span class="section-number">1.2.1. </span>software installment<a class="headerlink" href="#software-installment" title="Permalink to this headline">¶</a></h2>
+<p>本软件在dna-features-viewer的基础上进行了二次开发。其依赖的软件包包括：dna_features_viewer、bokeh、pandas和bcbio-gff。建议在anaconda环境基础上进行。
+建议参考资料：</p>
+<ul class="simple">
+<li><p><a class="reference external" href="https://pypi.org/project/dna-features-viewer/0.1.8/">https://pypi.org/project/dna-features-viewer/0.1.8/</a></p></li>
+<li><p><a class="reference external" href="https://github.com/Edinburgh-Genome-Foundry/DnaFeaturesViewer">https://github.com/Edinburgh-Genome-Foundry/DnaFeaturesViewer</a></p></li>
+<li><p><a class="reference external" href="https://github.com/VoigtLab/dnaplotlib">https://github.com/VoigtLab/dnaplotlib</a></p></li>
+</ul>
+<div class="line-block">
+<div class="line"><strong>作者：王頔 朱振昊</strong></div>
+<div class="line"><strong>指导教师：夏梦雷</strong></div>
+</div>
+<ul class="simple">
+<li><p>pip install dna_features_viewer</p></li>
+<li><p>pip install bokeh</p></li>
+<li><p>pip install pandas</p></li>
+<li><p>pip install bcbio-gff</p></li>
+</ul>
+<p>将两个py文件放到当前文件夹或者python搜索路径即可。</p>
+</div>
+<div class="section" id="id1">
+<h2><span class="section-number">1.2.2. </span>核心功能及用法<a class="headerlink" href="#id1" title="Permalink to this headline">¶</a></h2>
+<div class="section" id="gff-object">
+<h3><span class="section-number">1.2.2.1. </span>Gff_object<a class="headerlink" href="#gff-object" title="Permalink to this headline">¶</a></h3>
+<p>本对象可以实现基因位置、类型等信息的快速绘制。
+该对象包含9个属性：</p>
+<ul class="simple">
+<li><p>ID，代表序列ID，通常是染色体的ID，每条染色体拥有一个唯一的ID。默认值为：‘chrom1’</p></li>
+<li><p>Source，代表基因结构的来源，可以是数据库的名称，比如来自genebank数据库也可以是软件的名称，比如用Genescan软件预测得到，当然，也可以为空，用．点号填充。默认值为：‘custom’</p></li>
+<li><p>type，代表区间对应的特征类型，比如gene , exon等。默认值为：‘backbone’</p></li>
+<li><p>start，代表区间的起始位置。默认值为：0</p></li>
+<li><p>end，代表区间的终止位置。默认值为：1</p></li>
+<li><p>score，软件提供了统计值，如果没有，就用．填充。默认值为：‘.’</p></li>
+<li><p>strand，代表正负链的信息，+表示正链，-表示负链，?表示不清楚正负链的信息，当正负链信息没有意义时，可以用﹒填充。默认值为：‘+’</p></li>
+<li><p>phase，当描述的是CDS区间信息时，需要指定翻译时开始的位置，取值范围包括0，1，2。默认值为：‘.’</p></li>
+<li><p>name,默认值为：‘None_name’</p></li>
+</ul>
+<img alt="../_images/0001.png" class="align-center" src="../_images/0001.png" />
+<div class="section" id="id2">
+<h4><span class="section-number">1.2.2.1.1. </span><strong>核心方法</strong><a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>object_quick_define(a,b,c)</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：用于快速生成一个Gff_Object对象</p></li>
+<li><p>参数：
+a:int类型，基因的起始位置
+b:int类型，基因的终止位置
+c:字符串类型，基因的名称</p></li>
+<li><p>输出：
+输出一个含有基因起始位置a、基因终止位置b和基因名称c的Gff_Object默认对象</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>gff_write(a)</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：用于将生成的Gff_object对象写入Gff文件 参数：
+a：如果省略，则追加一个新对象；如果为’w’则重新写入</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>object_delete(self)</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：根据Gff_object的name 属性将对象进行删除</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>txt_generation()</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：方法类属性，将Gff对象信息汇总成gff格式描述方式</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>simple_plot()</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：绘制简易图</p></li>
+</ul>
+<ol class="arabic simple" start="6">
+<li><p>stick_figure_plot</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：绘制指示功能模块的简易图</p></li>
+</ul>
+</div>
+<div class="section" id="id3">
+<h4><span class="section-number">1.2.2.1.2. </span>简单案例<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">quick_class_plot_WD</span> <span class="k">import</span> <span class="n">Gff_Object</span>
+<span class="c1"># 导入quick_class_plot包</span>
+
+<span class="n">xia</span><span class="o">=</span><span class="n">Gff_Object</span><span class="p">()</span>
+<span class="c1"># 建立一个Gff_Object对象</span>
+
+<span class="n">xia</span><span class="o">.</span><span class="n">object_quick_define</span><span class="p">(</span><span class="mi">200</span><span class="p">,</span><span class="mi">300</span><span class="p">,</span><span class="s1">&#39;Gene A&#39;</span><span class="p">)</span>
+<span class="n">xia</span><span class="o">.</span><span class="n">gff_write</span><span class="p">(</span><span class="s1">&#39;w&#39;</span><span class="p">)</span>
+<span class="c1"># 绘制一个从200bp到300bp的基因A，并写入gff文件</span>
+
+<span class="n">xia</span><span class="o">.</span><span class="n">object_quick_define</span><span class="p">(</span><span class="mi">400</span><span class="p">,</span><span class="mi">425</span><span class="p">,</span><span class="s1">&#39;promoter&#39;</span><span class="p">)</span>
+<span class="n">xia</span><span class="o">.</span><span class="n">label</span><span class="o">=</span><span class="s1">&#39;promoter&#39;</span>
+<span class="n">xia</span><span class="o">.</span><span class="n">gff_write</span><span class="p">()</span>
+<span class="c1"># 在400bp到425bp绘制一个启动子，并将其写入</span>
+
+<span class="n">xia</span><span class="o">.</span><span class="n">object_quick_define</span><span class="p">(</span><span class="mi">425</span><span class="p">,</span><span class="mi">500</span><span class="p">,</span><span class="s1">&#39;GeneB&#39;</span><span class="p">)</span>
+<span class="n">xia</span><span class="o">.</span><span class="n">strand</span><span class="o">=</span><span class="s1">&#39;-&#39;</span>
+<span class="n">xia</span><span class="o">.</span><span class="n">gff_write</span><span class="p">()</span>
+<span class="c1"># 绘制一个从425bp到500bp的基因B，位于负链，并写入gff文件</span>
+
+<span class="n">Gff_Object</span><span class="o">.</span><span class="n">simple_plot</span><span class="p">()</span>
+<span class="c1">#绘制具有指示功能模块的简易图</span>
+
+<span class="n">xia</span><span class="o">.</span><span class="n">stick_figure_plot</span><span class="p">(</span><span class="n">xia</span><span class="o">.</span><span class="n">ID</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">500</span><span class="p">)</span>
+<span class="c1"># 由于stick figure中不含有backbone，如果有backbone，那么就不绘制图案</span>
+<span class="c1"># 为了美观，可在Gff_object后面加上labelsize=字符串大小，调整标注字体大小</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="gb-features-plot">
+<h3><span class="section-number">1.2.2.2. </span>gb_features_plot<a class="headerlink" href="#gb-features-plot" title="Permalink to this headline">¶</a></h3>
+<p>本函数可以基于genebank文件，进行自动绘制。与Gff_object相比，更加的简单。只需要了解7个函数即可（也就是6种绘图方式）</p>
+<img alt="../_images/0002.png" class="align-center" src="../_images/0002.png" />
+<div class="section" id="id4">
+<h4><span class="section-number">1.2.2.2.1. </span>核心用法<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h4>
+<ol class="arabic simple">
+<li><p>file = file_get()</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：用于自动下载或打开本地gb文件</p></li>
+<li><p>如果以NCBI的基因号，则自动下载；如果无参数，则通过文件对话框，打开本地文件</p></li>
+</ul>
+<ol class="arabic simple" start="2">
+<li><p>db_feeatures_plot(file)</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：直接绘制gb文件的特征图</p></li>
+<li><p>参数：file为gb文件的路径，类型为字符串</p></li>
+</ul>
+<ol class="arabic simple" start="3">
+<li><p>detailed_db_features_plot(file, a, b)</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：绘制详细的特征图</p></li>
+<li><p>参数：file为gb文件的路径，类型为字符串
+a为所关注基因的起始位置，类型为int
+b为所关注基因的终止位置，类型为int</p></li>
+</ul>
+<ol class="arabic simple" start="4">
+<li><p>circulared_db_features_plot(file)</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：绘制圆形的特征图</p></li>
+<li><p>参数：file为gb文件的路径，类型为字符串</p></li>
+</ul>
+<ol class="arabic simple" start="5">
+<li><p>gc_content_plot(file)</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：绘制包含基因特征和gc含量的图片</p></li>
+<li><p>参数：file为gb文件的路径，类型为字符串</p></li>
+</ul>
+<ol class="arabic simple" start="6">
+<li><p>mult_line_page_plot(file)</p></li>
+</ol>
+<ul class="simple">
+<li><p>用途：绘制详细基因信息，并导出pdf格式（也可以直接修改为想要的输出格式）</p></li>
+<li><p>参数：file为gb文件的路径，类型为字符串</p></li>
+</ul>
+</div>
+<div class="section" id="id5">
+<h4><span class="section-number">1.2.2.2.2. </span>简单案例<a class="headerlink" href="#id5" title="Permalink to this headline">¶</a></h4>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="kn">from</span> <span class="nn">gb_features_plot</span> <span class="k">import</span> <span class="o">*</span>
+
+<span class="n">file</span> <span class="o">=</span> <span class="n">file_get</span><span class="p">()</span> <span class="c1">#通过对话框打开带有注释的gb文件</span>
+<span class="n">db_feeatures_plot</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="n">detailed_db_features_plot</span><span class="p">(</span><span class="n">file</span><span class="p">,</span> <span class="mi">200</span><span class="p">,</span> <span class="mi">250</span><span class="p">)</span>
+<span class="n">circulared_db_features_plot</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="n">gc_content_plot</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="n">mult_line_page_plot</span><span class="p">(</span><span class="n">file</span><span class="p">)</span>
+<span class="n">os</span><span class="o">.</span><span class="n">startfile</span><span class="p">(</span><span class="s2">&quot;multiline_plot.pdf&quot;</span><span class="p">)</span> <span class="c1"># 输出为pdf格式</span>
+</pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+
+
+           </div>
+           
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="../Gene/index.html" class="btn btn-neutral float-right" title="2. 基因操作与合成生物学" accesskey="n" rel="next">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="1. Enzymatic hydrolysis and assembly.html" class="btn btn-neutral float-left" title="1.1. 分子酶切及拼接分析" accesskey="p" rel="prev"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        
+        &copy; Copyright 2020, MTC Team
+
+    </p>
+  </div>
+    
+    
+    
+    Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a
+    
+    <a href="https://github.com/rtfd/sphinx_rtd_theme">theme</a>
+    
+    provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script>
+
+  
+  
+    
+   
+
+</body>
+</html>
